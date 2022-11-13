@@ -24,20 +24,18 @@ public class LogInTask extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... strings) {
+        Integer statusCode =0;
         try {
             HttpResponse<JsonNode> loginResult = Unirest.get(MainActivity.URL+MainActivity.LOGIN_PATH+"{userId}")
                     .routeParam("userId",
                             MainActivity.username.getText().toString()+"#"+MainActivity.password.getText().toString()).asJson();
 
-            if(loginResult.getStatus()==200){
-                Intent intent = new Intent(MainActivity.instance, MainActivity2.class);
-                MainActivity.instance.startActivity(intent);
-                return new String("Uspjesna prijava");
-            }
+            statusCode = loginResult.getStatus();
+
         } catch (UnirestException e) {
             e.printStackTrace();
         }
-        return new String("Neuspjesna prijava");
+        return statusCode.toString();
     }
 
     @Override
@@ -51,13 +49,18 @@ public class LogInTask extends AsyncTask<String, String, String> {
 
 
     @Override
-    protected void onPostExecute(String text) {
+    protected void onPostExecute(String statusCode) {
         progressDialog.dismiss();
-        Toast.makeText(MainActivity.instance, text, Toast.LENGTH_SHORT).show();
-        if(text.equals("Uspjesna prijava")){
-            LoadPersonsTask loadPersonsTask = new LoadPersonsTask();
-            loadPersonsTask.execute();
+        if(statusCode.equals("200")){
+            Intent intent = new Intent(MainActivity.instance, MainActivity2.class);
+            MainActivity.instance.startActivity(intent);
+            Toast.makeText(MainActivity.instance, "Uspješna prijava", Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(MainActivity.instance, "Neuspješna prijava!", Toast.LENGTH_SHORT).show();
+
         }
+
 
     }
 

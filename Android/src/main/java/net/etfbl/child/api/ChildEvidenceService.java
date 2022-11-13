@@ -11,4 +11,11 @@ public class ChildEvidenceService {
 	public ArrayList<Child> getAllChilds(){
 		return data.readAllChildsFromDB();
 	}
+	
+	public boolean setAllChilds(ArrayList<Child> childs) {
+		if(data.updateChildToDB(childs)) {
+			return true;
+		}
+		return false;
+	}
 }

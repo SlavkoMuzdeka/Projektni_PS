@@ -4,18 +4,29 @@ import java.util.Objects;
 
 public class Child {
 	
+	private Integer id;
 	private String name;
 	private String parentName;
 	private String surname;
 	private Boolean isHere;
 	
-
-	public Child(String name, String parentName, String surname, Boolean isHere) {
+	public Child(Integer id, String name, String parentName, String surname, Boolean isHere) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.parentName = parentName;
 		this.surname = surname;
 		this.isHere = isHere;
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 

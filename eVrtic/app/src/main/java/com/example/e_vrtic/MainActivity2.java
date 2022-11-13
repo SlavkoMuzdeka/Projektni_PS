@@ -38,7 +38,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     public static MainActivity2 instance = null;
     public static ListView listView;
-    public static List<String> list = new ArrayList<>();
+    public static List<Person> list = new ArrayList<>();
     public static ArrayAdapter arrayAdapter;
 
     {
@@ -57,35 +57,44 @@ public class MainActivity2 extends AppCompatActivity {
                 android.R.layout.simple_list_item_multiple_choice, list);
         listView.setAdapter(arrayAdapter);
 
+        LoadPersonsTask loadPersonsTask = new LoadPersonsTask();
+        loadPersonsTask.execute();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Želite li sačuvati izmjene?");
-        alert.setMessage("Izmjene ostaju trajno sačuvane!");
-        alert.setPositiveButton("Da", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(MainActivity2.this, "Yes", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if(item.getItemId() == R.id.item_done) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Želite li sačuvati izmjene?");
+            alert.setMessage("Izmjene ostaju trajno sačuvane!");
+            alert.setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //Toast.makeText(MainActivity2.this, "Yes", Toast.LENGTH_SHORT).show();
+                    UpdatePersonsTask updatePersonsTask = new UpdatePersonsTask();
+                    updatePersonsTask.execute();
+                }
+            });
 
-        alert.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(MainActivity2.this, "No", Toast.LENGTH_SHORT).show();
-            }
-        });
+            alert.setNegativeButton("Odustani", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(MainActivity2.this, "Izmjene nisu sačuvane", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-        alert.show();
+            alert.show();
+        }else if (item.getItemId() == R.id.item_refresh){
+            LoadPersonsTask loadPersonsTask = new LoadPersonsTask();
+            loadPersonsTask.execute();
+        }
         return super.onOptionsItemSelected(item);
     }
 

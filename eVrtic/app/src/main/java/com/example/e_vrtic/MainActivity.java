@@ -16,7 +16,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String URL = "http://10.1.1.90:8080/Android/api/";
+    public static final String URL = "http://192.168.186.106:8080/Android/api/";
     public static final String LOGIN_PATH = "teacherLogIn/";
     public static final String PERSONS_PATH = "childEvidence/";
     public static TextView username;
