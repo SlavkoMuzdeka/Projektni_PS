@@ -26,8 +26,8 @@ public class LogInTask extends AsyncTask<String, String, String> {
     protected String doInBackground(String... strings) {
         Integer statusCode =0;
         try {
-            HttpResponse<JsonNode> loginResult = Unirest.get(MainActivity.URL+MainActivity.LOGIN_PATH+"{userId}")
-                    .routeParam("userId",
+            HttpResponse<JsonNode> loginResult = Unirest.get(MainActivity.URL+MainActivity.LOGIN_PATH+"{credentials}")
+                    .routeParam("credentials",
                             MainActivity.username.getText().toString()+"#"+MainActivity.password.getText().toString()).asJson();
 
             statusCode = loginResult.getStatus();

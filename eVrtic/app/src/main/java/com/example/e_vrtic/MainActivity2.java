@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.e_vrtic.model.Child;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONArray;
@@ -38,7 +39,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     public static MainActivity2 instance = null;
     public static ListView listView;
-    public static List<Person> list = new ArrayList<>();
+    public static List<Child> list = new ArrayList<>();
     public static ArrayAdapter arrayAdapter;
 
     {

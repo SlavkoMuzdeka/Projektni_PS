@@ -31,9 +31,6 @@ public class UpdatePersonsTask extends AsyncTask<String, String, String> {
             JSONObject object = new JSONObject();
             try {
                 object.put("id", MainActivity2.list.get(i).getId());
-                object.put("name", MainActivity2.list.get(i).getName());
-                object.put("parentName", MainActivity2.list.get(i).getParentName());
-                object.put("surname", MainActivity2.list.get(i).getSurname());
                 object.put("isHere", MainActivity2.list.get(i).getIsHere());
                 jsonArray.put(object);
             }catch (JSONException e){
@@ -68,7 +65,6 @@ public class UpdatePersonsTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String ststusCode) {
 
         progressDialog.dismiss();
-        Toast.makeText(MainActivity2.instance, ststusCode, Toast.LENGTH_SHORT).show();
         if(!ststusCode.equals("200")){
             Toast.makeText(MainActivity2.instance, "Neuspješno ažuriranje podataka", Toast.LENGTH_LONG).show();
         }

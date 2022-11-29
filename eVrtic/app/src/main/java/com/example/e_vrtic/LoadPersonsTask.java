@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.example.e_vrtic.model.Child;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -53,8 +55,14 @@ public class LoadPersonsTask extends AsyncTask<String, String, String> {
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject object = jsonArray.getJSONObject(i);
-                MainActivity2.list.add(new Person(object.getInt("id"), object.getString("name"), object.getString("parentName"),
-                        object.getString("surname"), object.getBoolean("isHere")));
+                Child child = new Child();
+                child.setId(object.getString("id"));
+                child.setName(object.getString("name"));
+                child.setSurname(object.getString("surname"));
+                child.setIsHere(object.getBoolean("isHere"));
+                child.setFatherName(object.getString("fatherName"));
+
+                MainActivity2.list.add(child);
                 MainActivity2.listView.setItemChecked(i, object.getBoolean("isHere"));
 
             }
