@@ -1,0 +1,120 @@
+1.KREIRANJE NALOGA ADMINISTRATORA
+
+-Za kreiranje naloga administratora koristi se procedura: 
+create_administrator(jmb:varchar, ime:varchar, prezime:varchar, datumRodjenja:DATE, ulica:varchar, grad:varchar, broj_ulice:varchar, korisnickoIme:varchar, lozinka:varchar, kreiranStatus:bool)
+kreiranStatus:bool predstavlja parametar koji oznacava da li je uspjesno kreiran nalog, dakle to je povratna vrijednost koja moze biti 0 (nije uspjesno kreiran nalog) ili 1 (nalog je uspjesno kreiran)
+Svi parametri osim kreiranStatus(koji je izlazlni parametar) su ulazni parametri
+
+2.KREIRANJE GRUPE
+
+-Za kreiranje grupe koristi se procedura:
+create_group(nazivGrupe:varchar, jeKreirana:bool)
+Parametar nazivGrupe je ulazni parametar, dok parametar jeKreiran je izlazni parametar koji oznacava da li je grupa uspjesno kreirana(1) ili nije(0)
+
+3.KREIRANJE AKTIVNOSTI
+
+-Za kreiranje aktivnosti koristi se procedura:
+create_acivity(naziv_aktivnosti:varchar, opis_aktivnosti:varchar, jeKreirana:bool)
+Prva dva parametra su ulazni parametri, dok je treci izlazni koji oznacava da li je aktivnost uspjesno kreirana(1) ili nije(0)
+
+4.DODAVANJE AKTIVNOSTI U GRUPU
+
+-Za dodavanje/pridruzivanje aktivnosti nekoj grupi koristi se procedura:
+add_activity_to_group(id_aktivnosti:INT, id_grupe:INT, datum_aktivnosti:DATE, trajanje_aktivnosti:INT, je_dodana:bool)
+Svi parametri osim je_dodana(koja je izlazni parametar)
+Napomena: trajanje_aktivnosti se izrazava u satima(ili drugacije), odnosno predstavlja neki period koliko ta aktivnost traje (da li traje sat ili dva..)
+
+5.BRISANJE AKTIVNOSTI IZ GRUPE
+
+-Za brisanje aktivnosti iz grupe koristi se procedura:
+delete_activity_from_group(id_aktivnosti:INT, id_grupe:INT, je_obrisana:bool)
+Zadnji parametar je izlazni parametar koji oznacava da li je aktivnosti iz grupe uspjesno obrisana(1) ili nije(0), dok su prva dva parametra ulazni parametri
+
+6.KREIRANJE (NALOGA)DJETETA
+
+-Za kreiranje naloga djeteta koristi se procedura:
+create_child(ime:varchar, prezime:varchar, jmb:varchar, ime_oca:varchar, ime_majke:varchar, datum_rodjenja:DATE, grad:varchar, ulica:varchar, broj:INT,broj_telefona_oca:varchar, broj_telefona_majke:varchar,visina:INT, tezina:INT, dokument:LONGBLOB, kreiran_status:bool)
+Zadnji parametar ove funkcije je izlazni parametar koji govori da li je nalog djeteta uspjesno kreiran(1) ili nije(0).
+Predzadnji parametar predstavlja ljekarsko uvjerenje koje se cuva u formi bajta u bazi podataka
+
+7.KREIRANJE (NALOGA)VASPITACA
+
+-Za kreiranje naloga vaspitaca koristi se procedura:
+create_vaspitac(jmb:varchar, ime:varchar, prezime:varchar, datumRodjenja:DATE, ulica:varchar, grad:varchar, brojUlice:INT, korisnickoIme:varchar, lozinka:varchar, dokumentHigijenskiTest:LONGBLOB, dokumentLjekarskoUvjerenje:LONGBLOB, je_kreiran:bool)
+Zadnji parametar je izlazni parametar koji govori da li je nalog vaspitaca uspjesno kreiran(1) ili nije(0)
+
+8.DODAVANJE OSOBE U GRUPU
+
+-Za dodavanje osobe(vaspitaca ili djeteta u grupu) koristi se procedura:
+add_person_to_group(id_osobe:INT, id_grupe INT, tip_osobe:bool, je_dodana:bool)
+Prva tri parametra su ulazni parametri, zadnji je izlazni koja oznacava da li je osoba uspjesno dodana u grupu(1) ili nije(0)
+Treci parametar, odnosno tip_osobe moze imati dvije vrijednosti, a to su 1 ili 0. To se koristilo radi dupliranja koda u BP. Osnovna ideja je da ako se proslijedi broj 0 to znaci da se dodaje dijete u grupu, a ako se proslijedi 1 to znaci da se dodaje 
+vaspitac u grupu (jer imamo dvije razlicite tabele za to)
+
+9.BRISANJE OSOBE IZ GRUPE
+
+-Za brisanje osobe(vaspitaca ili djeteta iz grupe) koristi se procedura:
+delete_person_from_group(id_osobe:INT, id_grupe:INT, tip_osobe:INT, obrisan_status:bool
+Prva tri parametra su ulazni parametri, zadnji je izlazni koja oznacava da li je osoba uspjesno dodana u grupu(1) ili nije(0)
+Treci parametar, odnosno tip_osobe moze imati dvije vrijednosti, a to su 1 ili 0. To se koristilo radi dupliranja koda u BP. Osnovna ideja je da ako se proslijedi broj 0 to znaci da se dodaje dijete u grupu, a ako se proslijedi 1 to znaci da se dodaje 
+vaspitac u grupu (jer imamo dvije razlicite tabele za to)
+
+10.KREIRANJE NAPOMENE ZA DIJETE
+
+-Za kreiranje napomene za dijete koristi se procedura:
+create_napomena(id_djeteta:INT, opisNapomene:varchar, je_kreiran:status)
+Prva dva parametra su ulazni parametrima, dok je treci parametar izlazni koji govori da li je osoba uspjesno dodana u grupu ili nije
+
+11.KREIRANJE CLANARINE ZA DIJETE
+
+-Za kreiranje clanarine za dijete koristi se procedura:
+create_clanarina(id_djeteta:INT, tipUsluge:varchar, iznos:INT, mjesec:DATE, je_kreirana:bool)
+Zadnji parametar je izlazni parametar koji govori da li je clanarina uspjesno kreirana(1) ili nije(0)
+
+12.PLACANJE CLARANINE
+
+-Za evidentiranje da je clanarina placena koristi se procedura:
+pay_clanarina(id_clanarine:INT)
+Ova procedura ima samo jedan parametar, a to je jedinstveni broj clanarine
+
+13.EVIDENTIRANJE DOLASKA
+
+-Za evidentiranje dolaska djeteta u vrtic koristi se procedura:
+log_dolazak(id_djeteta:INT, neplacenih_clanarina:INT, evidentirano:bool)
+Zadnji element je izlazni element koji oznacava da li smo uspjesno evidentirali dolazak djeteta(1) ili nismo(0)
+Drugi parametar je izlazni parametar koji je integer, odnosno koji broji da li ima neplacenih clanarina za uneseni id djeteta. To se koristi iz razloga da kada roditelj dovede dijete u vrtic, prilikom evidentiranja vaspitcu ce se prijaviti
+obavjestenje da li je "dijete" platilo sve clanarine do sad ili ima dugovanja, a ako ima tada ce vaspitac samo da obavijesti roditelja da je potrebno uplatiti clanarinu za odredjeni mjesec
+
+14.EVIDENTIRANJE ODLASKA
+
+-Za evidentiranja odlaska djeteta iz vrtica koristi se procedura:
+log_odlazak(id_djeteta:INT, evidentirano:bool)
+Zadnji element je izlazni element koji oznacava da li smo uspjesno evidentirali odlazak djeteta(1) ili nismo(0)
+
+15.DOHVATANJE PODATAKA O DJECI IZ GRUPE
+
+-Za dohvatanje podataka o djeci iz grupe koristi se procedura:
+get_childrens_from_group(id_grupe:INT)
+Imamo samo jedan parametar koji predstavlja ulazni parametar na osnovu kojeg dobijamo novu tabelu koja predstavlja djecu koja se nalaze u grupi sa datim id-jem, pri cemu ta tabela ima sledece kolone:
+JMB,Ime,Prezime,DatumRodjenja,Ulica,Grad,Broj,Visina,Tezina
+
+16.DOHVATANJE PODATAKA O VASPITACIMA IZ GRUPE
+
+-Za dohvatanje podataka o vaspitacima iz grupe koristi se procedura:
+get_vaspitaci_from_group(id_grupe:INT)
+Imamo samo jedan parametar koji predstavlja ulazni parametar na osnovu kojeg dobijamo novu tabelu koja predstavlja vaspitace koji se nalaze u grupi sa datim id-jem, pri cemu ta tabela ima sledece kolone:
+JMB,Ime,Prezime,DatumRodjenja,Ulica,Grad,Broj
+
+17.PRIKAZ EVIDENCIJA ODLASKA I DOLASKA DJETETA
+
+-Za prikaz evidencije o dolasku i odlasku djeteta koristi se procedura:
+get_all_logs(id_djeteta:INT)
+Imamo samo jedan ulazni parametar koji predstavlja id djeteta cija vremena dolazaka i odlazaka zelimo da prikazemo tabelarno. Pri cemu se ta tabela sastoji samo od jedne kolone:
+EvidentiranoVrijeme
+
+18.PRIKAZ CLANARINA ZA DIJETE
+
+-Za prikaz clanarina za dijete koristi se procedura:
+get_all_clanarine(id_djeteta:INT)
+Na osnovu ulaznog parametra id_djeteta prikazujemo sve clanarine za dato dijete tabelarno, pri cemu tabela ima sledece kolone:
+IdClanarine,TipUsluge,Iznos,Placeno,Datum, DatumPlacanja
