@@ -10,7 +10,7 @@ import model.Educator;
 
 public class EducatorService {
 
-	public static boolean addEducator(Educator educator) {
+	public static boolean addEducator(Educator educator, byte[] higyeneTest, byte[] medicalClearance) {
 		
 		JSONObject jsonObject = new JSONObject();
 		String searchQueryApi= Main.URL + Main.educator_URL;
@@ -19,15 +19,14 @@ public class EducatorService {
 		jsonObject.put("surname", educator.getSurname());
 		jsonObject.put("uid", educator.getUid());
 		jsonObject.put("dateOfBirth", educator.getDateOfBirth());
-		jsonObject.put("id", educator.getId());
 		jsonObject.put("address", educator.getAddress());
-	   jsonObject.put("username", educator.getUsername());
+		jsonObject.put("username", educator.getUsername());
 	    jsonObject.put("password", educator.getPassword());
 	    jsonObject.put("salary", educator.getSalary());
-	    jsonObject.put("selectionDate", educator.getSelectionDate());
-	    jsonObject.put("idGroup", educator.getIdGroup());  //neki podaci nisu poznati kad se dodaje
+	    jsonObject.put("idGroup", educator.getIdGroup());
+		jsonObject.put("hygieneTest", higyeneTest);
+		jsonObject.put("medicalClearance", medicalClearance);
 		
-	    //treba ljekarski i higijenski test
 	    Integer statusCode = 0;
 		
 		try {
@@ -41,6 +40,5 @@ public class EducatorService {
 			return true;
 		}
 		return false;	
-		
 	}
 }

@@ -116,12 +116,7 @@ public class MainWindowController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
 		listViewMainWindow.getItems().addAll(Main.listaGrupa);
-		
-		
-		
 	}
 	
 	   @FXML

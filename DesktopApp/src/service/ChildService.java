@@ -9,7 +9,7 @@ import model.Child;
 public class ChildService {
 	
 	
-	public static boolean addChild(Child child) {
+	public static boolean addChild(Child child, byte[] medicalClearance) {
 		
 		String searchQueryApi= Main.URL + Main.children_URL;
 		
@@ -21,18 +21,15 @@ public class ChildService {
 		jsonObject.put("height", child.getHeight());
 		jsonObject.put("weight", child.getWeight());
 		jsonObject.put("selectionDate", child.getSelectionDate());
-		jsonObject.put("idGroup", child.getIdGroup());
 		jsonObject.put("name", child.getName());
 		jsonObject.put("surname", child.getSurname());
 		jsonObject.put("uid", child.getUid());
 		jsonObject.put("dateOfBirth", child.getDateOfBirth().toString());
-		jsonObject.put("id", child.getId());
 		jsonObject.put("address", child.getAddress());
 		jsonObject.put("note", child.getNote());
-		//ljekarsko parsiram fajl 
-		
+		jsonObject.put("medicalClearance", medicalClearance);//Provjeriti da li se moze ovako poslati ili treba medicalClearance.toString()
+
 		Integer statusCode = 0;
-		
 		try {
 			statusCode= Unirest.post(searchQueryApi).body(jsonObject.toString().getBytes()).asBinary().getStatus();
 			System.out.println("proslo");

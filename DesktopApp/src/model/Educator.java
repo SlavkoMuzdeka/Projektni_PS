@@ -5,12 +5,11 @@ public class Educator extends Person {
 	private String username;
 	private String password;
 	private int salary;
-	private String selectionDate;
 	private int idGroup;
 
-	public Educator(String name, String surname, String uid, String dateOfBirth, String id, Address address,
+	public Educator(String name, String surname, String uid, String dateOfBirth, Address address,
 			String username, String password, int salary) {
-		super(name, surname, uid, dateOfBirth, id, address);
+		super(name, surname, uid, dateOfBirth, address);
 		this.username = username;
 		this.password = password;
 		this.salary = salary;
@@ -41,14 +40,6 @@ public class Educator extends Person {
 
 	public void setSalary(int salary) {
 		this.salary = salary;
-	}
-
-	public String getSelectionDate() {
-		return selectionDate;
-	}
-
-	public void setSelectionDate(String selectionDate) {
-		this.selectionDate = selectionDate;
 	}
 
 	public int getIdGroup() {

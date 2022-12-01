@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -20,72 +21,66 @@ import service.ChildService;
 
 public class AddChildWindowController {
 
-    @FXML
-    private Button btnAddMedicalClearance;
+    @FXML private Button btnAddMedicalClearance;
 
-    @FXML
-    private Button btnCreateChildAccount;
+    @FXML private Button btnCreateChildAccount;
 
-    @FXML
-    private DatePicker dateOfBirth;
+    @FXML private DatePicker dateOfBirth;
 
-    @FXML
-    private HBox hBoxHorizontalEducators;
+    @FXML private HBox hBoxHorizontalEducators;
 
-    @FXML
-    private Label lblLogo;
+    @FXML private Label lblLogo;
 
-    @FXML
-    private Label lblWindowName;
+    @FXML private Label lblWindowName;
 
-    @FXML
-    private Pane paneHorizontal;
+    @FXML private Pane paneHorizontal;
 
-    @FXML
-    private TextArea textAreaRemark;
+    @FXML private TextArea textAreaRemark;
 
-    @FXML
-    private TextField textFieldNumber;
+    @FXML private TextField textFieldNumber;
 
-    @FXML
-    private TextField textFieldMotherPhoneNumber;
+    @FXML private TextField textFieldMotherPhoneNumber;
 
-    @FXML
-    private TextField textFieldFatherPhoneNumber;
+    @FXML private TextField textFieldFatherPhoneNumber;
 
-    @FXML
-    private TextField textFieldCity;
+    @FXML private TextField textFieldCity;
 
-    @FXML
-    private TextField textFieldName;
+    @FXML private TextField textFieldName;
 
-    @FXML
-    private TextField textFieldMotherName;
+    @FXML private TextField textFieldMotherName;
 
-    @FXML
-    private TextField textFieldFatherName;
+    @FXML private TextField textFieldFatherName;
 
-    @FXML
-    private TextField textFieldUID;
+    @FXML private TextField textFieldUID;
 
-    @FXML
-    private TextField textFieldSurname;
+    @FXML private TextField textFieldSurname;
 
-    @FXML
-    private TextField textFieldWeight;
+    @FXML private TextField textFieldWeight;
 
-    @FXML
-    private TextField textFieldStreet;
+    @FXML private TextField textFieldStreet;
 
-    @FXML
-    private TextField textFieldHeight;
+    @FXML private TextField textFieldHeight;
+    
+    private byte[] data;//Promjenljiva koja cuva bajte dokumenta ljekarskog uvjerenja
 	
 	@FXML
 	void btnAddMedicalClearanceClick(ActionEvent event) {
 		Stage stage = new Stage();
-		FileChooser file = new FileChooser();
-		file.setTitle("Open File");
-		file.showOpenDialog(stage);
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Open File");
+		File file = fc.showOpenDialog(stage);
+		if(!file.getName().endsWith(".pdf")) {
+			showAlert(AlertType.ERROR, "Pokušajte ponovo", "Dokument ljekarskog uvjerenja mora biti sa ekstenzijom .pdfg");
+		}else {
+			try {
+				InputStream is = new FileInputStream(file);
+				data = new byte[(int)file.length()];
+				is.read(data);
+				is.close();
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 	
 	@FXML
@@ -109,11 +104,14 @@ public class AddChildWindowController {
 			child.setAddress(new Address(textFieldCity.getText(), textFieldStreet.getText(), textFieldNumber.getText()));
 			child.setNote(new Note(textAreaRemark.getText()));
 			
-			//pozivamo metodu iz service
-			ChildService.addChild(child);
-			clearFields();
+			if(data == null) {
+				showAlert(AlertType.ERROR, "Pokušajte ponovo", "Niste unijeli ljekarsko uvjerenje.");
+			}else {
+				ChildService.addChild(child, data);
+				clearFields();
+			}
 		}else {
-			showAlert();
+			showAlert(AlertType.ERROR, "Pokušajte ponovo", "Sva polja moraju biti popunjena.");
 		}
 	}
 	
@@ -121,11 +119,11 @@ public class AddChildWindowController {
 	 *  Pomocna funkcija koja prikazuje dijalog da vrijednost svih polja moraju biti popunjenja
 	 *  da bi se nalog djeteta mogao kreirati
 	 */
-	private void showAlert() {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Pokušajte ponovo");
+	public void showAlert(Alert.AlertType alertType, String title, String message) {
+		Alert alert = new Alert(alertType);
+		alert.setTitle(title);
 		alert.setHeaderText(null);
-		alert.setContentText("Sva polja moraju biti popunjena.");
+		alert.setContentText(message);
 		alert.show();
 	}
 	
