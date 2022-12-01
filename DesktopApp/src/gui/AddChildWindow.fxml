@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="682.0" maxWidth="726.0" minHeight="682.0" minWidth="726.0" prefHeight="682.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddChildWindowController">
+<AnchorPane maxHeight="682.0" maxWidth="726.0" minHeight="682.0" minWidth="726.0" prefHeight="682.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddChildWindowController">
    <children>
       <AnchorPane prefHeight="712.0" prefWidth="990.4000000000001" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -82,7 +82,7 @@
                                              </font>
                                           </Label>
                                           <TextField fx:id="textFieldFatherName" GridPane.columnIndex="1" />
-                                          <DatePicker fx:id="DateOfBirth" editable="false" prefHeight="26.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <DatePicker fx:id="dateOfBirth" editable="false" prefHeight="26.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                               <GridPane layoutX="11.0" layoutY="5.0" prefHeight="109.0" prefWidth="405.0">
