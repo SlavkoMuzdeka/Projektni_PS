@@ -13,6 +13,14 @@ public class Address {
 		this.city = city;
 		this.number = number;
 	}
+	
+	
+
+	public Address() {
+		super();
+	}
+
+
 
 	public int getIdAddress() {
 		return idAddress;

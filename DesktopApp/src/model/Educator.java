@@ -8,8 +8,8 @@ public class Educator extends Person {
 	private int idGroup;
 
 	public Educator(String name, String surname, String uid, String dateOfBirth, Address address,
-			String username, String password, int salary) {
-		super(name, surname, uid, dateOfBirth, address);
+			String username, String password,String id, int salary) {
+		super(name, surname, uid, dateOfBirth,  id,address);
 		this.username = username;
 		this.password = password;
 		this.salary = salary;

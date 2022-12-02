@@ -3,7 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import gui.ShowGroupWindowController.Cell;
+import gui.ShowGroupWindowController.CellEducator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

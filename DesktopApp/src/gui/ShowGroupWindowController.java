@@ -24,161 +24,211 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import model.Child;
+import model.Educator;
+import service.ChildService;
 import javafx.scene.Node;
 
-public class ShowGroupWindowController implements Initializable{
+public class ShowGroupWindowController implements Initializable {
 
+	@FXML
+	private AnchorPane paneShowGroup;
 
-    @FXML
-    private AnchorPane paneShowGroup;
-	
 	Button btnShow = new Button("Prikaži");
 	Button btnDelete = new Button("Obriši");
-    @FXML
-    private ListView<String> listViewListEducators;
-    @FXML
-    private ListView<String> listViewListChildren;
+	@FXML
+	private ListView<Educator> listViewListEducators;
+	@FXML
+	private ListView<Child> listViewListChildren;
 
-    @FXML
-    private Button btnActivity;
+	@FXML
+	private Button btnActivity;
 
-    @FXML
-    private Button btnBackWindow;
+	@FXML
+	private Button btnBackWindow;
 
-    @FXML
-    private Button btnAddChild;
+	@FXML
+	private Button btnAddChild;
 
-    @FXML
-    private AnchorPane btnAddChildToGroup;
+	@FXML
+	private AnchorPane btnAddChildToGroup;
 
-    @FXML
-    private Button btnAddEducator;
+	@FXML
+	private Button btnAddEducator;
 
-    @FXML
-    private Button btnDeleteGroup;
+	@FXML
+	private Button btnDeleteGroup;
 
-    @FXML
-    private Label lblNumberOfGroupMembers;
+	@FXML
+	private Label lblNumberOfGroupMembers;
 
-    @FXML
-    private Label lblGroupName;
+	@FXML
+	private Label lblGroupName;
 
-    @FXML
-    private Label lblLogo;
+	@FXML
+	private Label lblLogo;
 
+	@FXML
+	private Pane paneHorizontal;
 
-    @FXML
-    private Pane paneHorizontal;
+	class CellEducator extends ListCell<Educator> {
 
-    
-    static class Cell extends ListCell<String> {  
-        HBox hbox = new HBox();
-    	 Button button = new Button("Ukloni iz grupe");
-    	 Label label = new Label("");
-    	 Pane pane = new Pane();
-    	 
-    	 
-        
-        public Cell() {
-        	super();
-        	button.setStyle("-fx-background-color: #ffe6ff");
-        	hbox.getChildren().addAll(label,pane,button);
-        	hbox.setHgrow(pane, Priority.ALWAYS);
-        }
+		HBox hbox = new HBox();
+		Button button = new Button("Ukloni iz grupe");
+		Label label = new Label("");
+		Pane pane = new Pane();
+
+		public CellEducator() {
+			super();
+			button.setStyle("-fx-background-color: #ffe6ff");
+			button.setOnAction(event -> {
+				// if(this.getParent()) {}
+				System.out.println(getItem());
+				// System.out.println(listViewListChildren.getItems().get(getIndex()));
+			});
+			hbox.getChildren().addAll(label, pane, button);
+			hbox.setHgrow(pane, Priority.ALWAYS);
+		}
+
+		
+		/*
+		 * public void deleteFromGroupClick(ActionEvent event) {
+		 * if(event.equals(button)) { System.out.println("radi"); } }
+		 */
 
 		@Override
-		public void updateItem(final String item, boolean empty) {
+		public void updateItem(final Educator item, boolean empty) {
 			super.updateItem(item, empty);
 			setText(null);
 			setGraphic(null);
 			if (item != null && !empty) {
-				label.setText(item);
+				label.setText(item.getName() + " " + item.getSurname());
 				setGraphic(hbox);
 			}
 
 		}
-               
-        }
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		listViewListEducators.getItems().addAll(Main.listaVaspitaca);
-		listViewListEducators.setCellFactory(param -> new Cell());
-		listViewListChildren.getItems().addAll(Main.listaDjece);
-		listViewListChildren.setCellFactory(param -> new Cell());
-		
-	
-		
-		
 
 	}
 	
-	   @FXML
-	   void btnBackWindowClick(ActionEvent event) {
-			Parent root;
-			try {
-				root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-				Scene scene = new Scene(root);
-				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-				scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
-				stage.setScene(scene);
-				stage.show();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	   }
-	   
-	    @FXML
-	    void btnAddChildClick(ActionEvent event) {
-try {
-	    		
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("AddChildInGroup.fxml"));
-				Parent root = loader.load();
-				Scene scene = new Scene(root);
-				scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
-				Stage stage = new Stage();
-				stage.setScene(scene);
-				stage.show();
 
-			}catch(Exception ex) {
+	class CellChild extends ListCell<Child> {
+
+		HBox hbox = new HBox();
+		Button button = new Button("Ukloni iz grupe");
+		Label label = new Label("");
+		Pane pane = new Pane();
+
+		public CellChild() {
+			super();
+			button.setStyle("-fx-background-color: #ffe6ff");
+			button.setOnAction(event -> {
+				// if(this.getParent()) {}
+			//	System.out.println(getItem().getName());
+				ChildService childService= ChildService.getInstance();
+				childService.delete(getItem().getId());
 				
+				// System.out.println(listViewListChildren.getItems().get(getIndex()));
+			});
+			hbox.getChildren().addAll(label, pane, button);
+			hbox.setHgrow(pane, Priority.ALWAYS);
+		}
+
+		
+		/*
+		 * public void deleteFromGroupClick(ActionEvent event) {
+		 * if(event.equals(button)) { System.out.println("radi"); } }
+		 */
+
+		@Override
+		public void updateItem(final Child item, boolean empty) {
+			super.updateItem(item, empty);
+			setText(null);
+			setGraphic(null);
+			if (item != null && !empty) {
+				label.setText(item.getName() + " " + item.getSurname());
+				setGraphic(hbox);
 			}
-	    }
 
-	    @FXML
-	    void btnAddEducatorClick(ActionEvent event) {
-	    	try {
-	    		
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEducatorInGroupWindow.fxml"));
-				Parent root = loader.load();
-				Scene scene = new Scene(root);
-				scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
-				Stage stage = new Stage();
-				stage.setScene(scene);
-				stage.show();
+		}
 
-			}catch(Exception ex) {
-				
-			}
-	    }
+	}
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+//		listViewListEducators.getItems().addAll(Main.listaVaspitaca);
+//		listViewListEducators.setCellFactory(param -> new Cell());
+		listViewListChildren.getItems().addAll(Main.listChildren);
+		listViewListChildren.setCellFactory(param -> new CellChild());
 
-	    @FXML
-	    void btnDeleteGroupClick(ActionEvent event) {
- 
-	    	//napraviti mini dialog da se pita da li ste sigurni da li zelite izbrisati grupu
-	    }
-	    
-	    @FXML
-	    void btnActivityClick(ActionEvent event) {
+	}
 
-	    	   try {
-					Pane pane = FXMLLoader.load	(getClass().getResource("GroupActivityWindow.fxml"));
-					paneShowGroup.getChildren().setAll(pane);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	    }
+	@FXML
+	void btnBackWindowClick(ActionEvent event) {
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+			Scene scene = new Scene(root);
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void btnAddChildClick(ActionEvent event) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("AddChildInGroup.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (Exception ex) {
+
+		}
+	}
+
+	@FXML
+	void btnAddEducatorClick(ActionEvent event) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEducatorInGroupWindow.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.show();
+
+		} catch (Exception ex) {
+
+		}
+	}
+
+	@FXML
+	void btnDeleteGroupClick(ActionEvent event) {
+
+		// napraviti mini dialog da se pita da li ste sigurni da li zelite izbrisati
+		// grupu
+	}
+
+	@FXML
+	void btnActivityClick(ActionEvent event) {
+
+		try {
+			Pane pane = FXMLLoader.load(getClass().getResource("GroupActivityWindow.fxml"));
+			paneShowGroup.getChildren().setAll(pane);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

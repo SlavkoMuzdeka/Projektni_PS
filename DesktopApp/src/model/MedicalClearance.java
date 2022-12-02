@@ -14,7 +14,10 @@ public class MedicalClearance {
 		this.idPerson = idPerson;
 		this.file = file;
 	}
-
+	
+	public MedicalClearance() {
+		
+	}
 	public int getId() {
 		return id;
 	}

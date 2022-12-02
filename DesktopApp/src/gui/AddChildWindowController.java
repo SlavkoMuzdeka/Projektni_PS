@@ -16,6 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Address;
 import model.Child;
+import model.MedicalClearance;
 import model.Note;
 import service.ChildService;
 
@@ -62,6 +63,8 @@ public class AddChildWindowController {
     @FXML private TextField textFieldHeight;
     
     private byte[] data;//Promjenljiva koja cuva bajte dokumenta ljekarskog uvjerenja
+    
+    private ChildService childServiceInstance;
 	
 	@FXML
 	void btnAddMedicalClearanceClick(ActionEvent event) {
@@ -70,7 +73,7 @@ public class AddChildWindowController {
 		fc.setTitle("Open File");
 		File file = fc.showOpenDialog(stage);
 		if(!file.getName().endsWith(".pdf")) {
-			showAlert(AlertType.ERROR, "Pokušajte ponovo", "Dokument ljekarskog uvjerenja mora biti sa ekstenzijom .pdfg");
+			showAlert(AlertType.ERROR, "Pokuï¿½ajte ponovo", "Dokument ljekarskog uvjerenja mora biti sa ekstenzijom .pdfg");
 		}else {
 			try {
 				InputStream is = new FileInputStream(file);
@@ -105,13 +108,18 @@ public class AddChildWindowController {
 			child.setNote(new Note(textAreaRemark.getText()));
 			
 			if(data == null) {
-				showAlert(AlertType.ERROR, "Pokušajte ponovo", "Niste unijeli ljekarsko uvjerenje.");
+				showAlert(AlertType.ERROR, "Pokuï¿½ajte ponovo", "Niste unijeli ljekarsko uvjerenje.");
 			}else {
-				ChildService.addChild(child, data);
+				
+				MedicalClearance medicalClearance = new MedicalClearance();
+				medicalClearance.setFile(data);
+				child.setMedicalClearance(medicalClearance);
+				childServiceInstance = ChildService.getInstance();
+				childServiceInstance.addOne(child);
 				clearFields();
 			}
 		}else {
-			showAlert(AlertType.ERROR, "Pokušajte ponovo", "Sva polja moraju biti popunjena.");
+			showAlert(AlertType.ERROR, "Pokuï¿½ajte ponovo", "Sva polja moraju biti popunjena.");
 		}
 	}
 	

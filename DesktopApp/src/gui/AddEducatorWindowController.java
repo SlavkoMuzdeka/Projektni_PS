@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Address;
 import model.Educator;
+import service.EducatorService;
 import javafx.scene.Node;
 
 public class AddEducatorWindowController {
@@ -65,7 +66,7 @@ public class AddEducatorWindowController {
 	void btnCreateEducatorAccountClick(ActionEvent event) {
 		
 		if(textFieldName.getText() != null && textFieldSurname.getText() != null && textFieldUID.getText() != null && datePickerDateOfBirth.getValue() != null && 
-				textFieldCity.getText() != null && textFieldStreet.getText() != null && textFieldNumber.getText() != null) {
+				textFieldCity.getText() != null && textFieldStreet.getText() != null && textFieldNumber.getText() != null && textFieldUID.getText().length()!= 13) {
 			
 			Educator educator= new Educator();
 			educator.setName(textFieldName.getText());
@@ -76,6 +77,8 @@ public class AddEducatorWindowController {
 			educator.setAddress(address);
 			
 			//ljekarsko i higijensko (i u if njih ako treba)
+			EducatorService educatorService = EducatorService.getInstance();
+			educatorService.addOne(educator);
 		}else {
 			//prozorcic da nije moguce kreirati vaspitaca
 		}

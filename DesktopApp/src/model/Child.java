@@ -10,14 +10,15 @@ public class Child extends Person{
 	private String height;
 	private String weight;
 	private String  selectionDate;
+	private String idGroup;
 	private MedicalClearance medicalClearance;
 	private Note note;
 	private Boolean isHere;
 
-	public Child(String name, String surname, String uid, String dateOfBirth, Address address,
+	public Child(String name, String surname, String uid, String dateOfBirth, String id, Address address,
 			String fatherName, String motherName, String fatherPhoneNumber, String motherPhoneNumber, String height,
 			String weight, MedicalClearance medicalClearance, Note note) {
-		super(name, surname, uid, dateOfBirth, address);
+		super(name, surname, uid, dateOfBirth, id,address);
 		this.fatherName = fatherName;
 		this.motherName = motherName;
 		this.fatherPhoneNumber = fatherPhoneNumber;
@@ -86,6 +87,14 @@ public class Child extends Person{
 
 	public void setSelectionDate(String selectionDate) {
 		this.selectionDate = selectionDate;
+	}
+
+	public String getIdGroup() {
+		return idGroup;
+	}
+
+	public void setIdGroup(String idGroup) {
+		this.idGroup = idGroup;
 	}
 
 	public MedicalClearance getMedicalClearance() {

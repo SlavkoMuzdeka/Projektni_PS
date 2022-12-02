@@ -18,6 +18,10 @@ public class Note {
 		this.description = description;
 	}
 	
+	public Note() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}
