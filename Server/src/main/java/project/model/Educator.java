@@ -13,7 +13,7 @@ public class Educator extends Person {
 	public Educator() {
 		super();
 	}
-	public Educator(String name, String surname, String uid, LocalDate dateOfBirth, String id, Address address,
+	public Educator(String name, String surname, String uid, String dateOfBirth, String id, Address address,
 			String username, String password, int plata) {
 		super(name, surname, uid, dateOfBirth, id, address);
 		this.username = username;

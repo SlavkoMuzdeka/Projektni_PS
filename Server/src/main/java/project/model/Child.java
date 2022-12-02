@@ -1,23 +1,25 @@
 package project.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
-public class Child extends Person{
-	
+public class Child extends Person {
+
 	private String fatherName;
 	private String motherName;
 	private String fatherPhoneNumber;
 	private String motherPhoneNumber;
 	private String height;
 	private String weight;
-	private LocalDate  selectionDate;
+	private String selectionDate;
 	private Boolean isHere;
+	private Note note;
 	private int idGroup;
 
-	public Child(String name, String surname, String uid, LocalDate dateOfBirth, String id, Address address,
+	public Child(String name, String surname, String uid, String dateOfBirth, String id, Address address,
 			String fatherName, String motherName, String fatherPhoneNumber, String motherPhoneNumber, String height,
-			String weight, Boolean isHere) {
-		super(name, surname, uid, dateOfBirth, id,address);
+			String weight, Boolean isHere, Note note) {
+		super(name, surname, uid, dateOfBirth, id, address);
 		this.fatherName = fatherName;
 		this.motherName = motherName;
 		this.fatherPhoneNumber = fatherPhoneNumber;
@@ -25,8 +27,21 @@ public class Child extends Person{
 		this.height = height;
 		this.weight = weight;
 		this.isHere = isHere;
+		this.note = note;
+		this.selectionDate = new Date().toString();
 	}
+
 	
+	public Note getNote() {
+		return note;
+	}
+
+
+	public void setNote(Note note) {
+		this.note = note;
+	}
+
+
 	public Boolean getIsHere() {
 		return isHere;
 	}
@@ -36,7 +51,7 @@ public class Child extends Person{
 	}
 
 	public Child() {
-		
+
 	}
 
 	public String getFatherName() {
@@ -87,11 +102,11 @@ public class Child extends Person{
 		this.weight = weight;
 	}
 
-	public LocalDate getSelectionDate() {
+	public String getSelectionDate() {
 		return selectionDate;
 	}
 
-	public void setSelectionDate(LocalDate selectionDate) {
+	public void setSelectionDate(String selectionDate) {
 		this.selectionDate = selectionDate;
 	}
 
@@ -102,6 +117,5 @@ public class Child extends Person{
 	public void setIdGroup(int idGroup) {
 		this.idGroup = idGroup;
 	}
-	
-	
+
 }

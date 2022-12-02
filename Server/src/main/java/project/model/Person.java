@@ -7,11 +7,11 @@ public class Person {
 	private String name;
 	private String surname;
 	private String uid;
-	private LocalDate dateOfBirth;
+	private String dateOfBirth;
 	private String id; 
 	private Address address;
 	
-	public Person(String name, String surname, String uid, LocalDate dateOfBirth, String id, Address address) {
+	public Person(String name, String surname, String uid, String dateOfBirth, String id, Address address) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -43,10 +43,10 @@ public class Person {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public LocalDate getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	

@@ -13,7 +13,10 @@ public class Address {
 		this.city = city;
 		this.number = number;
 	}
-
+	
+	public Address() {
+		
+	}
 	public int getIdAddress() {
 		return idAddress;
 	}
