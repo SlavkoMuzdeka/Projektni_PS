@@ -5,7 +5,7 @@ create procedure get_childrens_from_group(
 	in id_grupe INT
 )
 begin
-	select JMB,Ime,Prezime,DatumRodjenja,Ulica,Grad,Broj,Visina,Tezina,ImeOca,ImeMajke,BrojTelefonaOca,BrojTelefonaMajke
+	select OSOBA_IdOsobe,JMB,Ime,Prezime,DatumRodjenja,Ulica,Grad,Broj,Visina,Tezina,ImeOca,ImeMajke,BrojTelefonaOca,BrojTelefonaMajke, Prisutno
     from osoba o,dijete d,grupa g,dijete_has_grupa dg,adresa adr
     where o.IdOsobe = d.OSOBA_IdOsobe
 		and g.IdGrupe = dg.GRUPA_IdGrupe

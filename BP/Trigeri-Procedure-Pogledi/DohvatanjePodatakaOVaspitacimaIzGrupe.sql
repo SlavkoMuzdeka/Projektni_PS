@@ -5,7 +5,7 @@ create procedure get_vaspitaci_from_group(
 	in id_grupe INT
 )
 begin
-	select JMB,Ime,Prezime,DatumRodjenja,Ulica,Grad,Broj
+	select OSOBA_IdOsobe, JMB,Ime,Prezime,DatumRodjenja,Ulica,Grad,Broj
     from osoba o,vaspitac v,grupa g,vaspitac_has_grupa vg,adresa adr
     where o.IdOsobe = v.OSOBA_IdOsobe
 		and g.IdGrupe = vg.GRUPA_IdGrupe

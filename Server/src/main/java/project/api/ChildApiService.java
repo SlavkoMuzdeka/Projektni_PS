@@ -1,19 +1,15 @@
 package project.api;
 
 import java.util.ArrayList;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import org.json.JSONObject;
 import project.data.ChildDataSource;
-import project.data.ChildEvidenceDataSource;
 import project.model.Address;
 import project.model.Child;
 import project.model.Note;
@@ -21,10 +17,10 @@ import project.model.Note;
 @Path("/children")
 public class ChildApiService {
 	
-	ChildDataSource dataService;
+	ChildDataSource childService;
 
 	public ChildApiService() {
-		dataService = ChildDataSource.getInstance();
+		childService = ChildDataSource.getInstance();
 	}
 	
 	@POST
@@ -57,7 +53,7 @@ public class ChildApiService {
 		child.setWeight(jsObject.getString("weight"));
 		child.setNote(note);
 		
-		if(dataService.addChildToDb(child)) {
+		if(childService.addChildToDb(child)) {
 			return Response.status(Response.Status.OK).build();
 		}else {
 			return Response.status(Response.Status.NO_CONTENT).build();
@@ -69,8 +65,8 @@ public class ChildApiService {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getChildren() throws ClassNotFoundException {
-		ArrayList<Child> children = dataService.getChildren();
+	public Response getChildren(){
+		ArrayList<Child> children = childService.getChildren();
 		return Response.status(200).entity(children).build();
 	}
 }

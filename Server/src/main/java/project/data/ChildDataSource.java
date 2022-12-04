@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import project.connectionPool.ConnectionPool;
 import project.model.Address;
 import project.model.Child;
@@ -17,6 +16,7 @@ import project.model.Child;
 public class ChildDataSource {
 
 	private static final String SELECT_ALL = "SELECT * FROM prikaz_djece";
+	private static final String SELECT_ALL_FROM_GROUP = "{call get_childrens_from_group(?)}";
 	private static final String DB_URL = "jdbc:mysql://192.168.43.87:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static ChildDataSource instance = null;
 
@@ -77,6 +77,7 @@ public class ChildDataSource {
 		return result;
 	}
 
+	//Konstruktor
 	private ChildDataSource() {
 		super();
 	}
@@ -108,6 +109,7 @@ public class ChildDataSource {
 				child.setMotherName(rs.getString(12));
 				child.setFatherPhoneNumber(rs.getString(13));
 				child.setMotherPhoneNumber(rs.getString(14));
+				child.setIsHere(rs.getInt(15) == 0 ? false : true);
 				children.add(child);
 			}
 		} catch (SQLException e) {
@@ -118,6 +120,45 @@ public class ChildDataSource {
 		return children;
 	}
 	
+	/*
+	 * Funkcija pomocu koje dobijamo listu djece koji se nalaze u odgovarajucoj grupi
+	 */
+	public ArrayList<Child> getChildrenFromGroup(int groupId){
+		ArrayList<Child> children = new ArrayList<>();
+		Connection c = null;
+		CallableStatement cs = null;
+		ResultSet rs =null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			cs = c.prepareCall(SELECT_ALL_FROM_GROUP);
+			cs.setInt(1, groupId);
+			rs = cs.executeQuery();
+			SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+			while(rs.next()) {
+				Child child = new Child();
+				child.setId(String.valueOf(rs.getInt(1)));
+				child.setUid(rs.getString(2));
+				child.setName(rs.getString(3));
+				child.setSurname(rs.getString(4));
+				child.setDateOfBirth(dt.format(rs.getDate(5)).toString());
+				child.setAddress(new Address(rs.getString(6), rs.getString(7), String.valueOf(rs.getInt(8))));
+				child.setHeight(String.valueOf(rs.getInt(9)));
+				child.setWeight(String.valueOf(rs.getInt(10)));
+				child.setFatherName(rs.getString(11));
+				child.setMotherName(rs.getString(12));
+				child.setFatherPhoneNumber(rs.getString(13));
+				child.setMotherPhoneNumber(rs.getString(14));
+				child.setIsHere(rs.getInt(15) == 0 ? false : true);
+				children.add(child);
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}finally {
+			close(c,cs,rs);
+		}
+		return children;
+	}
+
 	//Pomocna funckija koja zatvara otvorene resurse
 	private static void close(Connection c, Statement s,ResultSet rs) {
 		if (s != null) {
@@ -136,4 +177,5 @@ public class ChildDataSource {
 		}
 		ConnectionPool.getInstance().checkIn(c);
 	}
+	
 }
