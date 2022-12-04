@@ -1,6 +1,9 @@
 package project.api;
 
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -62,4 +65,12 @@ public class ChildApiService {
 		
 	}
 	
+	
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getChildren() throws ClassNotFoundException {
+		ArrayList<Child> children = dataService.getChildren();
+		return Response.status(200).entity(children).build();
+	}
 }

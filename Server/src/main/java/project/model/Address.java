@@ -17,6 +17,13 @@ public class Address {
 	public Address() {
 		
 	}
+	public Address(String street, String city, String number) {
+		super();
+		this.street = street;
+		this.city = city;
+		this.number = number;
+	}
+
 	public int getIdAddress() {
 		return idAddress;
 	}
