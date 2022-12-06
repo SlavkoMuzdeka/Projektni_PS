@@ -15,6 +15,17 @@ public class Child extends Person {
 	private Boolean isHere;
 	private Note note;
 	private int idGroup;
+	private MedicalClearance medicalClearance;
+
+	public MedicalClearance getMedicalClearance() {
+		return medicalClearance;
+	}
+
+
+	public void setMedicalClearance(MedicalClearance medicalClearance) {
+		this.medicalClearance = medicalClearance;
+	}
+
 
 	public Child(String name, String surname, String uid, String dateOfBirth, String id, Address address,
 			String fatherName, String motherName, String fatherPhoneNumber, String motherPhoneNumber, String height,

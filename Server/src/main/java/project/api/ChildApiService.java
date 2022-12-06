@@ -1,40 +1,47 @@
 package project.api;
 
 import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import org.json.JSONObject;
 import project.data.ChildDataSource;
+import project.data.ChildEvidenceDataSource;
 import project.model.Address;
 import project.model.Child;
+import project.model.MedicalClearance;
 import project.model.Note;
 
 @Path("/children")
 public class ChildApiService {
-	
-	ChildDataSource childService;
+
+	ChildDataSource dataService;
 
 	public ChildApiService() {
-		childService = ChildDataSource.getInstance();
+		dataService = ChildDataSource.getInstance();
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response writeOne(String jsonObject) {
-		
+
 		JSONObject jsObject = new JSONObject(jsonObject);
 
 		Address address = new Address();
 		address.setStreet(jsObject.getString("street"));
 		address.setCity(jsObject.getString("city"));
 		address.setNumber(jsObject.getString("number"));
-		
+
 		Note note = new Note();
 		note.setDescription("sadgasgjvdj");
 		note.setDescription(jsObject.getString("description"));
@@ -51,22 +58,38 @@ public class ChildApiService {
 		child.setMotherPhoneNumber(jsObject.getString("motherPhoneNumber"));
 		child.setHeight(jsObject.getString("height"));
 		child.setWeight(jsObject.getString("weight"));
+		
+		MedicalClearance medicalClearance = new MedicalClearance();
+		medicalClearance.setFile(jsObject.getString("medicalClearance").getBytes());
+		child.setMedicalClearance(medicalClearance);
 		child.setNote(note);
 		
-		if(childService.addChildToDb(child)) {
+
+		if (dataService.addChildToDb(child)) {
 			return Response.status(Response.Status.OK).build();
-		}else {
+		} else {
 			return Response.status(Response.Status.NO_CONTENT).build();
 		}
-		
+
 	}
-	
-	
+
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getChildren(){
-		ArrayList<Child> children = childService.getChildren();
-		return Response.status(200).entity(children).build();
+	public ArrayList<Child> readAll() {
+		return dataService.readChildrenFromDb();
 	}
+
+	@DELETE
+	@Path("/{childId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteOne(@PathParam("childId") String childId) {
+		Child child = new Child();
+		child.setId(childId);
+		if (dataService.deleteChildFromDb(child)) {
+			return Response.status(Response.Status.OK).build();
+		} else {
+			return Response.status(Response.Status.NO_CONTENT).build();
+		}
+	}
+
 }

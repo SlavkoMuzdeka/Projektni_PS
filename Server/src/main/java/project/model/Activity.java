@@ -1,31 +1,20 @@
 package project.model;
 
+import java.time.LocalDate;
+
 public class Activity {
 
 	private int id;
 	private String name;
 	private String description;
 	private int idGroup;
-	private String date;//Bilo je LocalDate, ali u svim drugim klasam datum je tipa string
-	private int duration;
-	
-	public Activity() {
-		super();
-	}
+	private LocalDate date;
 	
 	public Activity(int id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-	}
-
-	public int getDuration() {
-		return duration;
-	}
-
-	public void setDuration(int duration) {
-		this.duration = duration;
 	}
 
 	public int getId() {
@@ -60,11 +49,11 @@ public class Activity {
 		this.idGroup = idGroup;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	
