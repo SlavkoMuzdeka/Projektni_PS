@@ -13,7 +13,7 @@ import project.model.Educator;
 
 public class EducatorsDataSource {
 
-	private static final String DB_URL = "jdbc:mysql://10.1.0.74:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static final String DB_URL = "jdbc:mysql://10.1.0.252:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static EducatorsDataSource instance = null;
 
 	public static EducatorsDataSource getInstance() {
