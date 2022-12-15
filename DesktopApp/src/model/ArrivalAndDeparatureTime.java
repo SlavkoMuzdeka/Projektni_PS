@@ -1,18 +1,15 @@
 package model;
 
-import java.time.LocalDateTime;
 
 public class ArrivalAndDeparatureTime {
 	
 	private String id;
 	private String idChild;
-	private LocalDateTime recordedTime;
+	private String recordedTime;
 	private boolean type;
 	
-	public ArrivalAndDeparatureTime(String id, String idChild, LocalDateTime recordedTime, boolean type) {
-		super();
-		this.id = id;
-		this.idChild = idChild;
+	public ArrivalAndDeparatureTime(String recordedTime, boolean type) {
+		super();	
 		this.recordedTime = recordedTime;
 		this.type = type;
 	}
@@ -33,11 +30,11 @@ public class ArrivalAndDeparatureTime {
 		this.idChild = idChild;
 	}
 
-	public LocalDateTime getRecordedTime() {
+	public String getRecordedTime() {
 		return recordedTime;
 	}
 
-	public void setRecordedTime(LocalDateTime recordedTime) {
+	public void setRecordedTime(String recordedTime) {
 		this.recordedTime = recordedTime;
 	}
 

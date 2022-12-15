@@ -21,7 +21,11 @@ public class Group {
 		this.educators = educators;
 		this.activities = activities;
 	}
-
+	
+	public Group() {
+		super();
+	}
+	
 	public int getId() {
 		return id;
 	}

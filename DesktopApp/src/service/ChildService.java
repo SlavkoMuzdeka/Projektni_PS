@@ -11,6 +11,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import gui.Main;
 import model.Address;
 import model.Child;
+import model.MedicalClearance;
 import model.Note;
 
 public class ChildService implements IServiceable {
@@ -31,9 +32,24 @@ public class ChildService implements IServiceable {
 
 	@Override
 	public Boolean delete(String id) {
+		// System.out.println(id);
+			  Integer statusCode = 0;
+		  try {	
+				statusCode = Unirest.delete(Main.URL+Main.children_URL+"{person_id}") .routeParam("person_id", id).asJson().getStatus(); 
+				if (statusCode == 200) {
+					System.out.println("proslo");
+					//Alert za uspjesno dodavanje ovdje
+					return true;
+				}else {
+					//Alert za gresku ovdje
+					System.out.println("nije proslo");
+				}
+
+			} catch (UnirestException e) {
+				e.printStackTrace();
+			}
 		
-		return null;
-		
+		  return false;
 	}
 
 	@Override
@@ -59,7 +75,7 @@ public class ChildService implements IServiceable {
 		jsonObject.put("number", address.getNumber());
 		Note note = child.getNote();
 		jsonObject.put("description", note.getDescription());
-		jsonObject.put("medicalClearance", child.getMedicalClearance().getFile());
+		jsonObject.put("medicalClearance", child.getMedicalClearance().getFile().toString());
 
 		Integer statusCode = 0;
 
@@ -90,8 +106,33 @@ public class ChildService implements IServiceable {
 
 	@Override
 	public Object getOne(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		  Child child = new Child();
+		  JsonNode loginResult;
+		  JSONObject object= null;
+			try {
+				loginResult = Unirest.get(Main.URL+Main.children_URL+"{person_id}") .routeParam("person_id", id).asJson().getBody(); //provjeriti
+		        object= loginResult.getObject();
+		        
+			} catch (UnirestException e) {
+				e.printStackTrace();
+			}
+          child.setId(object.getString("id"));
+          child.setName(object.getString("name"));
+          child.setSurname(object.getString("surname"));
+          child.setFatherName(object.getString("fatherName"));
+          child.setDateOfBirth(object.getString("dateOfBirth"));
+          child.setMotherName(object.getString("motherName"));
+          child.setMotherPhoneNumber(object.getString("motherPhoneNumber"));
+          child.setFatherPhoneNumber(object.getString("fatherPhoneNumber"));
+          JSONObject addressObject = object.getJSONObject("address");
+          child.setAddress( new Address(addressObject.getString("city"),  addressObject.getString("street") , addressObject.getString("number")));
+          child.setHeight(object.getString("height"));
+          child.setWeight(object.getString("weight"));
+          JSONObject noteObject = object.getJSONObject("note");
+          child.setNote(new Note(noteObject.getString("description")));
+          
+          return child;
 	}
 
 	@Override
@@ -116,28 +157,82 @@ public class ChildService implements IServiceable {
             child.setId(object.getString("id"));
             child.setName(object.getString("name"));
             child.setSurname(object.getString("surname"));
+            child.setUid(object.getString("uid"));
             child.setFatherName(object.getString("fatherName"));
             child.setDateOfBirth(object.getString("dateOfBirth"));
             child.setMotherName(object.getString("motherName"));
             child.setMotherPhoneNumber(object.getString("motherPhoneNumber"));
             child.setFatherPhoneNumber(object.getString("fatherPhoneNumber"));
             JSONObject addressObject = object.getJSONObject("address");
-          child.setAddress( new Address(addressObject.getString("city"),  addressObject.getString("street") , addressObject.getString("number")));
+            child.setAddress( new Address(addressObject.getString("city"),  addressObject.getString("street") , addressObject.getString("number")));
             child.setHeight(object.getString("height"));
-      //      object.get
             child.setWeight(object.getString("weight"));
-            JSONObject noteObject = object.getJSONObject("note");
-            child.setNote(new Note(noteObject.getString("description")));
+            
+   
+            try {
+            	JSONObject noteObject = object.getJSONObject("note");
+            	if(noteObject.getString("description") != null) {
+                child.setNote(new Note(noteObject.getString("description")));
+            	} else {
+            		child.setNote(new Note(""));
+            }
+            }catch(Exception ex) {
+            	
+            }
+            	
             childrenList.add(child);
         }
 		
+        System.out.println(childrenList.size());
         return childrenList;
 	}
 
 	@Override
-	public Boolean edit(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean edit(Object object) {
+		
+		String searchQueryApi = Main.URL + Main.children_URL;
+		Child child = (Child) object;
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("id", child.getId());
+		jsonObject.put("fatherName", child.getFatherName());
+		jsonObject.put("motherName", child.getMotherName());
+		jsonObject.put("fatherPhoneNumber", child.getFatherPhoneNumber());
+		jsonObject.put("motherPhoneNumber", child.getMotherPhoneNumber());
+		jsonObject.put("height", child.getHeight());
+		jsonObject.put("weight", child.getWeight());
+		jsonObject.put("selectionDate", child.getSelectionDate());
+		jsonObject.put("name", child.getName());
+		jsonObject.put("surname", child.getSurname());
+		jsonObject.put("uid", child.getUid());
+		jsonObject.put("dateOfBirth", child.getDateOfBirth().toString());
+		Address address = child.getAddress();
+		jsonObject.put("city", address.getCity());
+		jsonObject.put("street", address.getStreet());
+		jsonObject.put("number", address.getNumber());
+		Note note = child.getNote();
+		jsonObject.put("description", note.getDescription());
+		jsonObject.put("medicalClearance" , new MedicalClearance(3, new byte[20]));
+		//jsonObject.put("medicalClearance", child.getMedicalClearance().getFile().toString());
+
+		Integer statusCode = 0;
+
+		try {
+			
+			statusCode = Unirest.put(searchQueryApi).body(jsonObject.toString().getBytes()).asBinary().getStatus();
+
+			if (statusCode == 200) {
+				System.out.println("proslo");
+				//Alert za uspjesno dodavanje ovdje
+				return true;
+			}else {
+				//Alert za gresku ovdje
+			}
+
+		} catch (UnirestException e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 	
 

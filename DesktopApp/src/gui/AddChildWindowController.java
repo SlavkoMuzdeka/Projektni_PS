@@ -117,10 +117,10 @@ public class AddChildWindowController {
 	@FXML
 	void btnCreateChildAccountClick(ActionEvent event) {
 		  
-		if(textFieldName.getText() != null && textFieldSurname.getText() != null && textFieldUID.getText() != null && textFieldFatherName.getText() != null &&
-				textFieldMotherName.getText() != null && dateOfBirth.getValue() != null && textFieldFatherPhoneNumber.getText() != null &&
-				textFieldMotherPhoneNumber.getText() != null && textFieldHeight.getText() != null && textFieldWeight.getText() != null
-				&& textFieldCity.getText() != null && textFieldStreet.getText() != null && textFieldNumber.getText() != null) {
+		if(!textFieldName.getText().equals("") && !textFieldSurname.getText().equals("") && textFieldUID.getText().length()== 13 && textFieldFatherName.getText() != null &&
+				!textFieldMotherName.getText().equals("") && !dateOfBirth.getValue().toString().equals("") && !textFieldFatherPhoneNumber.getText().equals("") &&
+				!textFieldMotherPhoneNumber.getText().equals("") && !textFieldHeight.getText().equals("") && !textFieldWeight.getText().equals("")
+				&& !textFieldCity.getText().equals("") && !textFieldStreet.getText().equals("") && !textFieldNumber.getText().equals("") ) {
 			
 			Child child = new Child();
 			child.setName(textFieldName.getText());
@@ -136,7 +136,7 @@ public class AddChildWindowController {
 			child.setAddress(new Address(textFieldCity.getText(), textFieldStreet.getText(), textFieldNumber.getText()));
 			child.setNote(new Note(textAreaRemark.getText()));
 			//pozivamo metodu iz service
-	//		ChildService.addChild(child);
+			
 			
 			if(data == null) {
 				CustomizedAlert ca = new CustomizedAlert(AlertType.WARNING,"Niste unijeli ljekarsko uvjerenje","");

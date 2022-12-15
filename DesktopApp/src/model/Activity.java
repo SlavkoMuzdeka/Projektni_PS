@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 
 public class Activity {
 
@@ -8,18 +7,19 @@ public class Activity {
 	private String name;
 	private String description;
 	private int idGroup;
-	private LocalDate date;
+	private String date;
 	
-	public Activity() {
-		
-	}
 	public Activity(int id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
-
+	
+	public Activity() {
+		
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -52,11 +52,11 @@ public class Activity {
 		this.idGroup = idGroup;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

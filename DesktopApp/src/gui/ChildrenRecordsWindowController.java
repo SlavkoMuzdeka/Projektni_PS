@@ -27,7 +27,7 @@ import service.ChildService;
 public class ChildrenRecordsWindowController implements Initializable {
 
 	private ArrayList<Child> childrenList = new ArrayList<Child>();
-	ChildService chdService = ChildService.getInstance();
+	private static ChildService chdService = ChildService.getInstance();
 
 	@FXML
 	private GridPane paneChildrenRecords;
@@ -72,12 +72,12 @@ public class ChildrenRecordsWindowController implements Initializable {
 
 				CustomizedAlert ca = new CustomizedAlert(AlertType.CONFIRMATION, "",
 						"Da li ste sigurni da želite obrisati dijete?");
-				ca.show();
+			
 				Optional<ButtonType> option = ca.showAndWait();
-				if (option.get() == ButtonType.OK) {
+				if (option.get() == ButtonType.YES) {
 
 					Child child = getItem();
-					// pozvati metodu za brisanje
+					chdService.delete(child.getId());
 				}
 
 				System.out.println(getItem());
@@ -113,7 +113,11 @@ public class ChildrenRecordsWindowController implements Initializable {
 	void listCellClicked(MouseEvent event) {
 		if (listViewChildrenRecordsWindow.getSelectionModel().getSelectedItem() != null) {
 			try {
-				Pane pane = FXMLLoader.load(getClass().getResource("ShowChildWindow.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowChildWindow.fxml"));
+				Pane pane = loader.load();
+				ShowChildWindowController controller = loader.getController();
+				controller.setFields(listViewChildrenRecordsWindow.getSelectionModel().getSelectedItem());
+				
 				paneChildrenRecords.getChildren().setAll(pane);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

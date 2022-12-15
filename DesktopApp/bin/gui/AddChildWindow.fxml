@@ -168,7 +168,7 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="textFieldFatherName" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                                    <DatePicker fx:id="DateOfBirth" editable="false" prefHeight="26.0" prefWidth="275.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <DatePicker fx:id="dateOfBirth" editable="false" prefHeight="26.0" prefWidth="275.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                     <Label prefHeight="18.0" prefWidth="242.0" text="Ime:" GridPane.columnIndex="1">
                                        <font>
                                           <Font name="Verdana" size="14.0" />

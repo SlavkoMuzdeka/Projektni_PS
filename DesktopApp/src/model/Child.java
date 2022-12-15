@@ -14,6 +14,7 @@ public class Child extends Person{
 	private MedicalClearance medicalClearance;
 	private Note note;
 	private Boolean isHere;
+	private ArrivalAndDeparatureTime arrivalAndDeparatureTime;
 
 	public Child(String name, String surname, String uid, String dateOfBirth, String id, Address address,
 			String fatherName, String motherName, String fatherPhoneNumber, String motherPhoneNumber, String height,
@@ -120,5 +121,15 @@ public class Child extends Person{
 	public void setIsHere(Boolean isHere) {
 		this.isHere = isHere;
 	}
+
+	public ArrivalAndDeparatureTime getArrivalAndDeparatureTime() {
+		return arrivalAndDeparatureTime;
+	}
+
+	public void setArrivalAndDeparatureTime(ArrivalAndDeparatureTime arrivalAndDeparatureTime) {
+		this.arrivalAndDeparatureTime = arrivalAndDeparatureTime;
+	}
+	
+	
 	
 }

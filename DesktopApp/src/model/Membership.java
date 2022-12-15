@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 
 public class Membership {
 	
@@ -8,12 +7,12 @@ public class Membership {
 	private String serviceType;
 	private int amount;
 	private boolean paid;
-	private LocalDate date;
+	private String date;
 	private int idChild;
-	private LocalDate paymentDate;
+	private String paymentDate;
 	
-	public Membership(int id, String serviceType, int amount, boolean paid, LocalDate date, int idChild,
-			LocalDate paymentDate) {
+	public Membership(int id, String serviceType, int amount, boolean paid, String date, int idChild,
+			String paymentDate) {
 		super();
 		this.id = id;
 		this.serviceType = serviceType;
@@ -23,7 +22,10 @@ public class Membership {
 		this.idChild = idChild;
 		this.paymentDate = paymentDate;
 	}
-
+	
+	public Membership() {
+		super();
+	}
 	public int getId() {
 		return id;
 	}
@@ -56,11 +58,11 @@ public class Membership {
 		this.paid = paid;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -72,11 +74,11 @@ public class Membership {
 		this.idChild = idChild;
 	}
 
-	public LocalDate getPaymentDate() {
+	public String getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(LocalDate paymentDate) {
+	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	

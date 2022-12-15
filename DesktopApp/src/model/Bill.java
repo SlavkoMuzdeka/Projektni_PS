@@ -1,17 +1,16 @@
 package model;
 
-import java.time.LocalDate;
 
 public class Bill {
 	
-	private String billNumber; // pitati
+	private String billNumber;
 	private String billType;
 	private int amount;
-	private LocalDate date;
+	private String date;
 	private boolean paid;
 	private String kindergartenName;
 	
-	public Bill(String billNumber, String billType, int amount, LocalDate date, boolean paid,
+	public Bill(String billNumber, String billType, int amount, String date, boolean paid,
 			String kindergartenName) {
 		super();
 		this.billNumber = billNumber;
@@ -20,6 +19,10 @@ public class Bill {
 		this.date = date;
 		this.paid = paid;
 		this.kindergartenName = kindergartenName;
+	}
+	
+	public Bill() {
+		
 	}
 
 	public String getBillNumber() {
@@ -46,11 +49,11 @@ public class Bill {
 		this.amount = amount;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

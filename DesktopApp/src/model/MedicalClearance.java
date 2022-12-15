@@ -8,9 +8,8 @@ public class MedicalClearance {
 	private int idPerson;
 	private byte[] file;
 	
-	public MedicalClearance(int id, int idPerson, byte[] file) {
+	public MedicalClearance( int idPerson, byte[] file) {
 		super();
-		this.id = id;
 		this.idPerson = idPerson;
 		this.file = file;
 	}

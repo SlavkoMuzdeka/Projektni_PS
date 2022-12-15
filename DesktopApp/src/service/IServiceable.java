@@ -7,7 +7,7 @@ public interface IServiceable {
 	public Boolean addAll(Object items);
 	public Object getOne(String id);
 	public Object getAll(String searchString);
-	public Boolean edit(String id);
+	public Boolean edit(Object object);
 	
 }
 

@@ -81,7 +81,7 @@ public class GroupActivityWindowController {
 	    	
 	    	Activity a = new Activity();
 	    	a.setName(textFieldNameAcitivity.getText());
-	    	a.setDate(datePickerDateActivity.getValue());
+	    	a.setDate(datePickerDateActivity.getValue().toString());
 	    	a.setDescription(textFieldDescriptionAcitivity.getText());
 	    	
 	    	//proslijediti servisu
