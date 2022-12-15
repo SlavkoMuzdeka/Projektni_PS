@@ -13,7 +13,7 @@ import project.model.Child;
 
 public class ChildEvidenceDataSource {
 
-	private static final String DB_URL = "jdbc:mysql://10.1.0.74:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static final String DB_URL = "jdbc:mysql://10.1.0.252:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static ChildEvidenceDataSource instance = null;
 
 	public static ChildEvidenceDataSource getInstance() {
@@ -38,7 +38,7 @@ public class ChildEvidenceDataSource {
 			Class.forName("com.mysql.jdbc.Driver"); 
 			c = DriverManager.getConnection(DB_URL, "root", "Filip123");
 			ps = c.prepareStatement(
-					"select IdOsobe, Ime, Prezime, Prisutno , ImeOca from osoba inner join dijete on IdOsobe=OSOBA_IdOsobe");
+					"select IdOsobe, Ime, Prezime, Prisutno , ImeOca from osoba inner join dijete on IdOsobe=OSOBA_IdOsobe where aktivan is true");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {

@@ -17,7 +17,7 @@ import project.model.Note;
 
 public class ChildDataSource {
 
-	private static final String DB_URL = "jdbc:mysql://192.168.43.87:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	private static final String DB_URL = "jdbc:mysql://10.1.0.252:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static ChildDataSource instance = null;
 
 	public static ChildDataSource getInstance() {
@@ -65,6 +65,61 @@ public class ChildDataSource {
 			cs.executeUpdate();
 
 			if ((Integer) cs.getObject(16) == 1) {
+				result = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+
+		return result;
+	}
+	
+	public Boolean updateChildToDb(Child child) {
+
+		Connection c = null;
+		CallableStatement cs = null;
+		Boolean result = false;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			c = DriverManager.getConnection(DB_URL, "root", "Filip123");
+			cs = c.prepareCall("{call updateChild(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+			
+			
+			cs.setInt(1, Integer.parseInt(child.getId()));
+			cs.setString(2, child.getName());
+			cs.setString(3, child.getSurname());
+			cs.setString(4, child.getUid());
+
+			String date = child.getDateOfBirth();
+
+			cs.setString(5, date);
+
+			cs.setString(6, child.getFatherName());
+			cs.setString(7, child.getMotherName());
+			cs.setString(8, child.getMotherPhoneNumber());
+			cs.setString(9, child.getFatherPhoneNumber());
+			cs.setString(10, child.getHeight());
+			cs.setString(11, child.getWeight());
+			cs.setString(12, child.getAddress().getCity());
+			cs.setString(13, child.getAddress().getStreet());
+			cs.setString(14, child.getAddress().getNumber());
+			cs.setString(15, child.getNote().toString());
+			
+			ByteArrayInputStream fileInputStream = new ByteArrayInputStream(child.getMedicalClearance().getFile());
+			
+			//cs.setBinaryStream(15, fileInputStream);
+			cs.setString(16,"dojfjw");
+			cs.registerOutParameter(17, Types.SMALLINT);
+
+			cs.executeUpdate();
+
+			if ((Integer) cs.getObject(17) == 1) {
 				result = true;
 			}
 
@@ -148,7 +203,7 @@ public class ChildDataSource {
 				
 				Note note = new Note();
 				note.setDescription(rs.getString(15));
-				
+								
 				child.setNote(note);
 				
 				childs.add(child);
