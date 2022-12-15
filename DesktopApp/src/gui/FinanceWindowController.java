@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -22,8 +23,10 @@ public class FinanceWindowController implements Initializable {
 
 	ArrayList<String> listButtons = new ArrayList<String>();
 	
-	@FXML
-	private AnchorPane PaneFinance;
+
+	
+    @FXML
+    private GridPane PaneFinance;
 
 	@FXML
 	private ListView<String> listViewFinance;
@@ -43,24 +46,32 @@ public class FinanceWindowController implements Initializable {
 		System.out.println(listViewFinance.getSelectionModel().getSelectedItem());
 		if (listViewFinance.getSelectionModel().getSelectedItem().toString()
 				.equals("Evidencija o mjesečnim troškovima")) {
-			System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+			
+		
 			try {
-				Pane pane = FXMLLoader.load(getClass().getResource("MonthlyExpensesWindow.fxml"));
+				GridPane pane = FXMLLoader.load(getClass().getResource("MonthlyExpensesWindow.fxml"));
 				PaneFinance.getChildren().setAll(pane);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		
+			System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+			
 		} else if (listViewFinance.getSelectionModel().getSelectedItem().toString()
 				.equals("Pregled dugovanja za svu djecu")) {
 			System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+			
+
 			try {
-				Pane pane = FXMLLoader.load(getClass().getResource("MembershipFeesWindow.fxml"));
+				GridPane pane = FXMLLoader.load(getClass().getResource("MembershipFeesWindow.fxml"));
 				PaneFinance.getChildren().setAll(pane);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+		
 		}
 	}
 }

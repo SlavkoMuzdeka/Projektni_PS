@@ -1,6 +1,9 @@
 package gui;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
@@ -8,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -62,6 +66,9 @@ public class AddEducatorWindowController {
 	    @FXML
 	    private TextField textFieldStreet;
 
+	    private byte[] dataHygieneTest;
+	    
+	    private byte[] dataMedicalClearance;
 	@FXML
 	void btnCreateEducatorAccountClick(ActionEvent event) {
 		
@@ -80,7 +87,8 @@ public class AddEducatorWindowController {
 			EducatorService educatorService = EducatorService.getInstance();
 			educatorService.addOne(educator);
 		}else {
-			//prozorcic da nije moguce kreirati vaspitaca
+			
+			CustomizedAlert ca = new CustomizedAlert(AlertType.WARNING,"Nije moguće kreirati nalog vaspitača!","");
 		}
 
 	}
@@ -88,17 +96,44 @@ public class AddEducatorWindowController {
 	@FXML
 	void btnAddHygieneTestClick(ActionEvent event) {
 		Stage stage = new Stage();
-		FileChooser file = new FileChooser();
-		file.setTitle("Open File");
-		file.showOpenDialog(stage);
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Open File");
+		
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+        fc.getExtensionFilters().add(extFilter);
+        File file = fc.showOpenDialog(stage);
+
+	
+			try {
+				InputStream is = new FileInputStream(file);
+				dataHygieneTest = new byte[(int)file.length()];
+				is.read(dataHygieneTest);
+				is.close();
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
 	}
 
 	@FXML
 	void btnAddMedicalClearanceClick(ActionEvent event) {
+		
 		Stage stage = new Stage();
-		FileChooser file = new FileChooser();
-		file.setTitle("Open File");
-		file.showOpenDialog(stage);
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Open File");
+		
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+        fc.getExtensionFilters().add(extFilter);
+        File file = fc.showOpenDialog(stage);
+
+	
+			try {
+				InputStream is = new FileInputStream(file);
+				dataMedicalClearance = new byte[(int)file.length()];
+				is.read(dataMedicalClearance);
+				is.close();
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
 	}
 
 }

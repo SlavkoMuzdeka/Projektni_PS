@@ -1,6 +1,11 @@
 package service;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import gui.Main;
@@ -26,8 +31,9 @@ public class ChildService implements IServiceable {
 
 	@Override
 	public Boolean delete(String id) {
-
+		
 		return null;
+		
 	}
 
 	@Override
@@ -83,15 +89,49 @@ public class ChildService implements IServiceable {
 	}
 
 	@Override
-	public void getOne(String id) {
+	public Object getOne(String id) {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
-	public void getAll(String searchString) {
-		// TODO Auto-generated method stub
+	public Object getAll(String searchString) {
+		
+		JSONArray jsonArray=null;
+		ArrayList<Child> childrenList = new ArrayList<>();
+		JsonNode loginResult;
+		try {
+			loginResult = Unirest.get(Main.URL+Main.children_URL).asJson().getBody();
+			System.out.println("ddd");
+	        jsonArray = loginResult.getArray();
+	        
+		} catch (UnirestException e) {
+			e.printStackTrace();
+		}
+		
+        for (int i = 0; i < jsonArray.length(); i++) {
 
+            JSONObject object = jsonArray.getJSONObject(i);
+            Child child = new Child();
+            child.setId(object.getString("id"));
+            child.setName(object.getString("name"));
+            child.setSurname(object.getString("surname"));
+            child.setFatherName(object.getString("fatherName"));
+            child.setDateOfBirth(object.getString("dateOfBirth"));
+            child.setMotherName(object.getString("motherName"));
+            child.setMotherPhoneNumber(object.getString("motherPhoneNumber"));
+            child.setFatherPhoneNumber(object.getString("fatherPhoneNumber"));
+            JSONObject addressObject = object.getJSONObject("address");
+          child.setAddress( new Address(addressObject.getString("city"),  addressObject.getString("street") , addressObject.getString("number")));
+            child.setHeight(object.getString("height"));
+      //      object.get
+            child.setWeight(object.getString("weight"));
+            JSONObject noteObject = object.getJSONObject("note");
+            child.setNote(new Note(noteObject.getString("description")));
+            childrenList.add(child);
+        }
+		
+        return childrenList;
 	}
 
 	@Override

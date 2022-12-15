@@ -2,68 +2,149 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="682.0" maxWidth="726.0" minHeight="682.0" minWidth="726.0" prefHeight="682.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowEducatorWindowController">
+<GridPane prefHeight="808.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowEducatorWindowController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
    <children>
-      <AnchorPane prefHeight="712.0" prefWidth="990.4000000000001" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Pane layoutY="29.0" prefHeight="682.0" prefWidth="990.0">
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="35.99999847412109" minHeight="10.0" prefHeight="19.199993515014647" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="159.20000648498535" minHeight="10.0" prefHeight="159.20000648498535" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <HBox fx:id="hBoxHorizontalEducators" layoutX="-11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="733.0">
+                  <GridPane fx:id="paneHorizontal" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
-                        <Pane fx:id="paneHorizontal" nodeOrientation="LEFT_TO_RIGHT" prefHeight="124.0" prefWidth="739.0" HBox.hgrow="ALWAYS">
+                        <GridPane prefHeight="130.0" prefWidth="1023.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
-                              <Label fx:id="lblWindowName" layoutX="171.0" layoutY="62.0" prefHeight="52.0" prefWidth="296.0" text="Prikaz vaspitača" textFill="WHITE">
-                                 <font>
-                                    <Font name="Verdana" size="36.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fx:id="ProfilePicture" fitHeight="112.0" fitWidth="130.0" layoutX="35.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/user.png" />
-                                 </image>
-                              </ImageView>
+                              <GridPane prefHeight="160.0" prefWidth="464.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.60000610351562" minWidth="9.200006103515626" prefWidth="9.200006103515626" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.60000610351562" minWidth="10.0" prefWidth="102.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.79999999999995" minWidth="10.0" prefWidth="454.79999999999995" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label fx:id="lblWindowName" prefHeight="52.0" prefWidth="325.0" text="Prikaz vaspitača" textFill="WHITE" GridPane.columnIndex="2">
+                                       <font>
+                                          <Font name="Verdana" size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="ProfilePicture" fitHeight="112.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                       <image>
+                                          <Image url="@../icons/user.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </GridPane>
+                              <GridPane prefHeight="130.0" prefWidth="358.0" GridPane.columnIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.200048828125" minWidth="10.0" prefWidth="179.200048828125" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.20000000000002" minWidth="10.0" prefWidth="215.20000000000002" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.599951171875" minWidth="10.0" prefWidth="177.39999999999998" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="55.200009155273435" minHeight="10.0" prefHeight="55.200009155273435" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="35.60001220703125" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="61.600006103515625" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </GridPane>
                            </children>
-                           <padding>
-                              <Insets right="1.0" />
-                           </padding>
-                           <HBox.margin>
-                              <Insets right="1.0" />
-                           </HBox.margin>
-                        </Pane>
+                        </GridPane>
                      </children>
-                  </HBox>
-                  <HBox layoutY="127.0">
+                  </GridPane>
+               </children>
+            </GridPane>
+            <GridPane GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane prefHeight="598.0" prefWidth="926.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.39999389648438" minWidth="0.0" prefWidth="0.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1040.8001342773437" minWidth="10.0" prefWidth="1040.8001342773437" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.59997558593739" minWidth="4.79986572265625" prefWidth="4.79986572265625" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="49.799993896484374" minHeight="10.0" prefHeight="14.59997978210449" />
+                        <RowConstraints maxHeight="563.4000202178955" minHeight="10.0" prefHeight="552.8000793457031" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="563.4000202178955" minHeight="10.0" prefHeight="15.199920654296875" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
-                        <Pane prefHeight="555.0" prefWidth="724.0" HBox.hgrow="ALWAYS">
+                        <Pane prefHeight="555.0" prefWidth="724.0">
                            <children>
-                              <GridPane layoutX="14.0" layoutY="14.0" prefHeight="112.0" prefWidth="478.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints maxHeight="116.79999389648438" minHeight="10.0" prefHeight="42.00001220703125" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="177.60001220703126" minHeight="10.0" prefHeight="39.59998779296875" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="192.19998779296873" minHeight="10.0" prefHeight="37.399987792968744" vgrow="SOMETIMES" />
-                                </rowConstraints>
+                              <GridPane layoutX="14.0" layoutY="14.0" prefHeight="374.0" prefWidth="597.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="24.000006103515624" minHeight="10.0" prefHeight="14.399999999999999" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="63.2" minHeight="10.0" prefHeight="42.400019836425784" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="50.199980163574224" minHeight="10.0" prefHeight="12.800024414062506" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="90.5999755859375" minHeight="10.0" prefHeight="44.80000610351564" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="69.79999389648438" minHeight="10.0" prefHeight="12.00000610351563" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="104.79999389648438" minHeight="10.0" prefHeight="47.999981689453136" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="70.00001831054686" minHeight="9.599920654296852" prefHeight="9.599920654296852" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="99.2000793457031" minHeight="10.0" prefHeight="53.5999450683594" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="70.00004272460939" minHeight="10.0" prefHeight="17.600000000000023" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="95.20002441406251" minHeight="10.0" prefHeight="50.79999389648435" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="95.20002441406251" minHeight="10.0" prefHeight="94.0000061035156" vgrow="SOMETIMES" />
+                                 </rowConstraints>
                                  <children>
                                     <Label prefHeight="42.0" prefWidth="240.0" text="Ime i prezime:">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="42.0" prefWidth="240.0" text="JMBG:" GridPane.rowIndex="1">
+                                    <Label prefHeight="42.0" prefWidth="240.0" text="JMBG:" GridPane.rowIndex="4">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
@@ -78,7 +159,7 @@
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblUID" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Label fx:id="lblUID" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
@@ -88,73 +169,47 @@
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                 </children>
-                              </GridPane>
-                              <GridPane layoutX="14.0" layoutY="132.0" prefHeight="181.0" prefWidth="524.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="187.39996337890625" minWidth="10.0" prefWidth="121.40002441406251" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.1999877929688" minWidth="10.0" prefWidth="332.7999755859375" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label prefHeight="18.0" prefWidth="109.0" text="Ulica:">
+                                    <Label prefHeight="18.0" prefWidth="109.0" text="Ulica:" GridPane.rowIndex="6">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="18.0" prefWidth="109.0" text="Broj:" GridPane.rowIndex="1">
+                                    <Label prefHeight="18.0" prefWidth="109.0" text="Broj:" GridPane.rowIndex="8">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="18.0" prefWidth="109.0" text="Grad:" GridPane.rowIndex="2">
+                                    <Label prefHeight="18.0" prefWidth="109.0" text="Grad:" GridPane.rowIndex="10">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="18.0" prefWidth="109.0" text="Grupa:" GridPane.rowIndex="3">
+                                    <Label fx:id="lblStreet" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblStreet" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1">
+                                    <Label fx:id="lblNumber" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lblNumber" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <font>
-                                          <Font name="Verdana" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblCity" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <font>
-                                          <Font name="Verdana" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lblGroup" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <Label fx:id="lblCity" prefHeight="18.0" prefWidth="203.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                                        <font>
                                           <Font name="Verdana" size="14.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </GridPane>
-                           </children></Pane>
+                           </children>
+                        </Pane>
                      </children>
-                  </HBox>
+                  </GridPane>
                </children>
-            </Pane>
-           
-            <Label fx:id="lblLogo" layoutX="40.0" layoutY="2.0" prefHeight="9.0" prefWidth="23.0" />
+            </GridPane>
          </children>
-         <effect>
-            <ColorAdjust />
-         </effect>
-      </AnchorPane>
+      </GridPane>
+     
+                  <Label fx:id="lblLogo" prefHeight="9.0" prefWidth="23.0" />
    </children>
-</AnchorPane>
+</GridPane>

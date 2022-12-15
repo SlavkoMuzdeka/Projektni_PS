@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddEducatorInGroupWindowController">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddEducatorInGroupWindowController">
    <children>
       <AnchorPane layoutX="-94.0" layoutY="-154.0" prefHeight="689.0" prefWidth="532.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Pane fx:id="paneHorizontalListChildren" layoutX="93.0" layoutY="173.0" prefHeight="65.0" prefWidth="443.0">
+            <Pane fx:id="paneHorizontal" layoutX="93.0" layoutY="173.0" prefHeight="65.0" prefWidth="443.0">
                <children>
                   <Label layoutX="14.0" layoutY="33.0" prefHeight="23.0" prefWidth="151.0" text="Lista vaspitača" textFill="WHITE">
                      <font>

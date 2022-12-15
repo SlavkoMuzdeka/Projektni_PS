@@ -99,13 +99,13 @@ public class EducatorService implements IServiceable {
 	}
 
 	@Override
-	public void getOne(String id) {
-
+	public Object getOne(String id) {
+		return null;
 	}
 
 	@Override
-	public void getAll(String searchString) {
-
+	public Object getAll(String searchString) {
+		return null;
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Activity;
 
 
 
@@ -76,14 +77,28 @@ public class GroupActivityWindowController {
 	    @FXML
 	    void btnAddActivityClick(ActionEvent event) {
 	    
+	    	//dodati uslov ako je nesto prazno da ne moze
+	    	
+	    	Activity a = new Activity();
+	    	a.setName(textFieldNameAcitivity.getText());
+	    	a.setDate(datePickerDateActivity.getValue());
+	    	a.setDescription(textFieldDescriptionAcitivity.getText());
+	    	
+	    	//proslijediti servisu
+	    	
 	    }
+	    
 	 
 	@FXML
 	    void btnBackWindowClick(ActionEvent event) {
 
 		 try {
-				Pane pane = FXMLLoader.load	(getClass().getResource("ShowGroupWindow.fxml"));
-				paneGroupActivity.getChildren().setAll(pane);
+			 
+			 FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowGroupWindow.fxml"));
+				Parent root = loader.load();
+				Stage s = (Stage) (((Node) event.getSource()).getScene().getWindow());
+				s.getScene().setRoot(root);
+			
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -93,14 +108,13 @@ public class GroupActivityWindowController {
 	    @FXML
 	    void btnHomeClick(ActionEvent event) {
 
-	    	Parent root;
 			try {
-				root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-				Scene scene = new Scene(root);
-				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-				scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
-				stage.setScene(scene);
-				stage.show();
+				
+				 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+					Parent root = loader.load();
+					Stage s = (Stage) (((Node) event.getSource()).getScene().getWindow());
+					s.getScene().setRoot(root);
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
