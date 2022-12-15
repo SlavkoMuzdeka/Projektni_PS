@@ -1,9 +1,8 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import gui.AddEducatorInGroupWindowController.Cell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,14 +14,16 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import model.Child;
 
 public class AddChildInGroupController implements Initializable {
 
+	private static ArrayList<Child> listChildrenAddingInGroup = new ArrayList<Child>();
     @FXML
     private Button btnAddChildren;
 
     @FXML
-    private Pane paneHorizontalListChildren;
+    private Pane paneHorizontal;
 
     @FXML
     private ListView<String> ListViewChildren;
@@ -38,6 +39,16 @@ public class AddChildInGroupController implements Initializable {
         public Cell() {
         	super();
         	cbox.setStyle("-fx-background-color: #ffe6ff");
+        	cbox.setOnAction(e ->{
+        		
+        		if(cbox.isSelected()) {
+        		
+        			listChildrenAddingInGroup.add(new Child()); // Child child = getItem();
+        			//ako je stavljena kvacica kupiti dijete
+        		}else {
+        			
+        		}
+        			});
         	hbox.getChildren().addAll(label,pane,cbox);
         	hbox.setHgrow(pane, Priority.ALWAYS);
         }
@@ -58,7 +69,10 @@ public class AddChildInGroupController implements Initializable {
   	public void initialize(URL arg0, ResourceBundle arg1) {
   		// TODO Auto-generated method stub
   		
-    	ListViewChildren.getItems().addAll(Main.listaDjece);
+   
+    	ListViewChildren.getItems().add("Dijete2");
+    	ListViewChildren.getItems().add("Dijete3");
+
     	ListViewChildren.setCellFactory(param -> new Cell());
   		
   	}
@@ -66,6 +80,11 @@ public class AddChildInGroupController implements Initializable {
     @FXML
     void btnAddChildrenClick(ActionEvent event) {
 
+    	
+    	//saljemo listu servisu
+    	listChildrenAddingInGroup.removeAll(listChildrenAddingInGroup);//iz liste obrisemo sve dodano
+    	
+    	
     }
 }
 

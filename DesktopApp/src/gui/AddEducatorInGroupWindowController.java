@@ -1,9 +1,10 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import gui.ShowGroupWindowController.CellEducator;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,21 +16,29 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import model.Child;
+import model.Educator;
 
 public class AddEducatorInGroupWindowController implements Initializable{
 
 
+	private static ArrayList<Educator> listEducatorsAddingInGroup = new ArrayList<Educator>();
     @FXML
     private ListView<String> ListViewEducators;
     @FXML
     private Button btnAddEducators;
 
     @FXML
-    private Pane paneHorizontalListChildren;
+    private Pane paneHorizontal;
 
     @FXML
     void btnAddEducatorsClick(ActionEvent event) {
 
+    	
+    	//saljemo listu servisu
+    	listEducatorsAddingInGroup.removeAll(listEducatorsAddingInGroup);//iz liste obrisemo sve dodano
+    	
+    	
     }
 	
     static class Cell extends ListCell<String> {  
@@ -43,6 +52,17 @@ public class AddEducatorInGroupWindowController implements Initializable{
         public Cell() {
         	super();
         	cbox.setStyle("-fx-background-color: #ffe6ff");
+        	
+	cbox.setOnAction(e ->{
+        		
+        		if(cbox.isSelected()) {
+        		
+        			listEducatorsAddingInGroup.add(new Educator()); // Child child = getItem();
+        			//ako je stavljena kvacica kupiti dijete
+        		}else {
+        			
+        		}
+        			});
         	hbox.getChildren().addAll(label,pane,cbox);
         	hbox.setHgrow(pane, Priority.ALWAYS);
         }

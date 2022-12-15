@@ -10,6 +10,9 @@ public class Activity {
 	private int idGroup;
 	private LocalDate date;
 	
+	public Activity() {
+		
+	}
 	public Activity(int id, String name, String description) {
 		super();
 		this.id = id;

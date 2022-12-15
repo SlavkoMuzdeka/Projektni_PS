@@ -29,6 +29,15 @@
 	-fx-background-color: #df9fdf;
 }
 
+.combo-box:hover {
+	-fx-background-color: #df9fdf;
+}
+.scroll-pane .viewport {
+    -fx-background-color: #EEE2F6; /*or whatever you want*/
+  }
+.scroll-pane {
+  	-fx-background-color:#EEE2F6;
+}
 .button:focused {
 	-fx-backdrop-filter: blur(3px) saturate(142%);
 	-fx-webkit-backdrop-filter: blur(3px) saturate(142%);
@@ -38,10 +47,20 @@
 }
 
 #paneHorizontal {
-	-fx-background-image: url("../backgrounds/horizontal.png");
+
+		-fx-background-color: linear-gradient(to right, transparent , #600080 , transparent );
+	
+		-fx-border-width:0px;
+			
+	   
+	
+-fx-border-style: solid;
 }
 #paneHorizontalListChildren{
 	-fx-background-image: url("../backgrounds/horizontal.png");
+}
+.text-area:hover{
+	-fx-background-color: #df9fdf;
 }
 .text-field:hover{
 	-fx-background-color: #df9fdf;
@@ -49,9 +68,7 @@
 .text-field{
 	-fx-background-color: #f3f2f3;
 }
-.text-area:hover{
-	-fx-background-color: #df9fdf;
-}
+
 .list-cell {
 	-fx-backdrop-filter: blur(3px) saturate(100%);
 	-fx-webkit-backdrop-filter: blur(3px) saturate(100%);
