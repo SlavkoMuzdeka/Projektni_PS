@@ -32,7 +32,7 @@ public class Main extends Application{
 		// TODO Auto-generated method stub
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("LogInWindow.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
