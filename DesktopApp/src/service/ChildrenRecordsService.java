@@ -19,7 +19,7 @@ public class ChildrenRecordsService implements IServiceable {
 	@Override
 	public Boolean addAll(Object items) {   //ako se posalje lista u kojoj su vec smjesteni podaci isHere
 		
-		String searchQueryApi = Main.URL+Main.children_URL;  // putanja?
+		String searchQueryApi = Main.URL+Main.children_URL; 
         JSONArray jsonArray = new JSONArray();
         List<Object> childrenList = Arrays.asList((Object[])items);
         for(int i=0; i<childrenList.size(); i++){
@@ -63,7 +63,7 @@ public class ChildrenRecordsService implements IServiceable {
 		 JSONArray jsonArray=null;
 		ArrayList<Child> childrenList = new ArrayList<>();
 	        try {
-	            JsonNode loginResult = Unirest.get(Main.URL+Main.children_URL).asJson().getBody(); //putanja?
+	            JsonNode loginResult = Unirest.get(Main.URL+Main.children_URL).asJson().getBody(); 
 	            jsonArray = loginResult.getArray();
 
 	        } catch (UnirestException e) {

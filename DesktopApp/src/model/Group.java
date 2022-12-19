@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Group {
 	
-	private int id;
+	private String id;
 	private String name;
 	private int numberOfMembers;
 	private ArrayList<Child> children= new ArrayList<>();
 	private ArrayList<Educator> educators= new ArrayList<>();
 	private ArrayList<Activity> activities= new ArrayList<>();
 	
-	public Group(int id, String name, int numberOfMembers, ArrayList<Child> children, ArrayList<Educator> educators,
+	public Group(String id, String name, int numberOfMembers, ArrayList<Child> children, ArrayList<Educator> educators,
 			ArrayList<Activity> activities) {
 		super();
 		this.id = id;
@@ -26,11 +26,11 @@ public class Group {
 		super();
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

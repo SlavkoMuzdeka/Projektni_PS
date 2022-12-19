@@ -14,6 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import model.Account;
+import model.Administrator;
+import model.Educator;
+import service.LogInService;
 
 public class LogInWindowController {
 
@@ -36,7 +40,12 @@ public class LogInWindowController {
     @FXML
     void btnLogInClick(ActionEvent event) {
 
-    	//napraviti provjeru lozinke
+    	LogInService logInService = LogInService.getInstance();
+    	Object object =logInService.checkCredentials(txtFieldUserName.getText(), passwordField.getText());
+    	
+    	if (object instanceof Account) {
+    		
+    		Account account = (Account)object;
     	try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml")); 
 			Parent root = loader.load();
@@ -47,6 +56,11 @@ public class LogInWindowController {
 			stage.setScene(scene);
 			stage.getIcons().add(new Image("./icons/icon.png"));
 			stage.setTitle("e-Vrtic");
+			
+			if(!account.isAdministrator()) {
+	    		MainWindowController controller = loader.getController();
+	    		controller.setButtonsToFalse();
+			}	
 			stage.show();
 			Stage s = (Stage)(((Node) event.getSource()).getScene().getWindow());
 			s.close();
@@ -54,6 +68,10 @@ public class LogInWindowController {
 		}catch(Exception ex) {
 			
 		}
+    	
+    }else {
+    	//neuspjesna prijava
+    }
     	
     }
 }

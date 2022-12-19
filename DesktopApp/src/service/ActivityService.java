@@ -94,7 +94,6 @@ public class ActivityService implements IServiceable{
 				   activity.setDate(object.getString("date"));
 				   activity.setName(object.getString("name"));
 				   activity.setDescription(object.getString("description")); 
-				   //period ako treba
 				   activityList.add(activity);
 			   }
 			   

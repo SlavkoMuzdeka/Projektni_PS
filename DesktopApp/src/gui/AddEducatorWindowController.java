@@ -72,8 +72,8 @@ public class AddEducatorWindowController {
 	@FXML
 	void btnCreateEducatorAccountClick(ActionEvent event) {
 		
-		if(textFieldName.getText() != null && textFieldSurname.getText() != null && textFieldUID.getText() != null && datePickerDateOfBirth.getValue() != null && 
-				textFieldCity.getText() != null && textFieldStreet.getText() != null && textFieldNumber.getText() != null && textFieldUID.getText().length()!= 13) {
+		if(!textFieldName.getText().equals("") && !textFieldSurname.getText().equals("") && !datePickerDateOfBirth.getValue().equals("") && 
+				!textFieldCity.getText().equals("") && !textFieldStreet.getText().equals("") && !textFieldNumber.getText().equals("") && textFieldUID.getText().length()!= 13) {
 			
 			Educator educator= new Educator();
 			educator.setName(textFieldName.getText());
@@ -88,7 +88,7 @@ public class AddEducatorWindowController {
 			educatorService.addOne(educator);
 		}else {
 			
-			CustomizedAlert ca = new CustomizedAlert(AlertType.WARNING,"Nije moguće kreirati nalog vaspitača!","");
+			CustomizedAlert ca = new CustomizedAlert(AlertType.WARNING,"Nije moguce kreirati nalog vaspitaca!","");
 		}
 
 	}

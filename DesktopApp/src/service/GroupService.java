@@ -24,21 +24,40 @@ public class GroupService implements IServiceable{
 	
 	@Override
 	public Boolean delete(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		  Integer statusCode = 0;
+		  try {	
+				statusCode = Unirest.delete(Main.URL+Main.group_URL+"{group_id}") .routeParam("group_id", id).asJson().getStatus(); 
+				if (statusCode == 200) {
+					return true;
+				}
+			} catch (UnirestException e) {
+				e.printStackTrace();
+			}	
+		  return false;
 	}
 
 	@Override
 	public Boolean addOne(Object item) {
 		
-		//String searchQueryApi = Main.URL + Main.group_URL;
+		String searchQueryApi = Main.URL + Main.group_URL;
 		Group group = (Group) item;
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("name", group.getName());
-		jsonObject.put("numberOfMembers", group.getNumberOfMembers());
-		//jsonObject.put(""); 
-		//jsonObject.put();
-		return null;
+
+		Integer statusCode = 0;
+		try {
+			
+			statusCode = Unirest.post(searchQueryApi).body(jsonObject.toString().getBytes()).asBinary().getStatus();
+
+			if (statusCode == 200) {
+				return true;
+			}
+
+		} catch (UnirestException e) {
+			e.printStackTrace();
+		}
+
+		return false;
 		
 	}
 
@@ -74,11 +93,8 @@ public class GroupService implements IServiceable{
 	         Group group = new Group();
 	         
 	         group.setName(object.getString("name"));
-	         group.setNumberOfMembers(object.getInt("numberOfMembers"));
-	      //   group.setChildren(null);
-	       //  group.setEducators(null);
-	       //  group.setActivities(null);
-	         
+	         group.setId(object.getString("id"));
+
 	         groupsList.add(group);
 	         
 		}

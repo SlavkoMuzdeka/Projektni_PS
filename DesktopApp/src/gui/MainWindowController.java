@@ -37,6 +37,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Account;
+import model.Person;
+import service.LogInService;
 
 public class MainWindowController implements Initializable {
 
@@ -62,10 +65,6 @@ public class MainWindowController implements Initializable {
 
 	@FXML
 	private Button btnAddChild;  //dobroo
-
-
-
-	
 
 	@FXML
 	private Button btnChildrenRecords;  //dobroo
@@ -259,8 +258,16 @@ public class MainWindowController implements Initializable {
 	@FXML
 	void btnShowAccountClick(ActionEvent event) {
 		try {
-			Pane pane = FXMLLoader.load(getClass().getResource("ShowAccountWindow.fxml"));
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowAccountWindow.fxml"));
+			Pane pane = loader.load();
+			ShowAccountWindowController controller = loader.getController();
+			LogInService logInService = LogInService.getInstance();
+			Account account = logInService.getAccount();	
+			controller.setFields(account);
+			
 			borderPaneMainPane.setCenter(pane);
+		
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -301,6 +308,12 @@ public class MainWindowController implements Initializable {
 		
     		 
     	 }
+    }
+    
+    public void setButtonsToFalse() {
+    	
+    	btnFinance.setVisible(false);
+    	btnEducators.setVisible(false);
     }
 
 }
