@@ -1,11 +1,15 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -16,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 
 public class ChildEvidencyOfPresenceWindowController implements Initializable{
 
@@ -37,6 +42,9 @@ public class ChildEvidencyOfPresenceWindowController implements Initializable{
 
     @FXML
     private GridPane paneHorizontal;
+    
+    @FXML
+    private GridPane paneEvidencyOfPresence;
     
 	static class Cell extends ListCell<String> {  
         HBox hbox = new HBox();
@@ -87,6 +95,17 @@ public class ChildEvidencyOfPresenceWindowController implements Initializable{
 
     @FXML
     void listCellClicked(MouseEvent event) {
+    
+		
+		 if(listViewChildEvidencyWindow.getSelectionModel().getSelectedItem()!=null) {
+	    	 try {
+					Pane pane = FXMLLoader.load	(getClass().getResource("ShowChildEvidencyOfPresenceWindow.fxml"));
+					paneEvidencyOfPresence.getChildren().setAll(pane);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    }
 
     }
 

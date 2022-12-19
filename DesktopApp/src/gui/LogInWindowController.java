@@ -41,11 +41,11 @@ public class LogInWindowController {
     void btnLogInClick(ActionEvent event) {
 
     	LogInService logInService = LogInService.getInstance();
-    	Object object =logInService.checkCredentials(txtFieldUserName.getText(), passwordField.getText());
+   // 	Object object =logInService.checkCredentials(txtFieldUserName.getText(), passwordField.getText());
     	
-    	if (object instanceof Account) {
-    		
-    		Account account = (Account)object;
+//    	if (object instanceof Account) {
+   		
+ //   		Account account = (Account)object;
     	try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml")); 
 			Parent root = loader.load();
@@ -57,10 +57,10 @@ public class LogInWindowController {
 			stage.getIcons().add(new Image("./icons/icon.png"));
 			stage.setTitle("e-Vrtic");
 			
-			if(!account.isAdministrator()) {
+//			if(!account.isAdministrator()) {
 	    		MainWindowController controller = loader.getController();
 	    		controller.setButtonsToFalse();
-			}	
+//			}	
 			stage.show();
 			Stage s = (Stage)(((Node) event.getSource()).getScene().getWindow());
 			s.close();
@@ -69,9 +69,9 @@ public class LogInWindowController {
 			
 		}
     	
-    }else {
+ //   }else {
     	//neuspjesna prijava
-    }
+   // }
     	
     }
 }

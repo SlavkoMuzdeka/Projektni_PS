@@ -99,9 +99,17 @@ public class GroupsWindowController implements Initializable {
 
 	@FXML
 	void btnAddGroupClick(ActionEvent event) {
+		
+		
 		try {
-			Pane pane = FXMLLoader.load(getClass().getResource("CreateGroupWindow.fxml"));
-			GridPaneGroups.getChildren().setAll(pane);
+			Stage stage = new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateGroupWindow.fxml")); 
+			Parent root = loader.load();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("mainWindow.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

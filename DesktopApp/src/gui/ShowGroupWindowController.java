@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -81,6 +82,9 @@ public class ShowGroupWindowController implements Initializable {
 
 	@FXML
 	private Pane paneHorizontal;
+	
+    @FXML
+    private BorderPane borderPaneMain;
 
 	static class CellEducator extends ListCell<Educator> {
 		HBox hbox = new HBox();
@@ -181,6 +185,8 @@ public class ShowGroupWindowController implements Initializable {
 
 	@FXML
 	void btnBackWindowClick(ActionEvent event) {
+		
+		
 		try {
 			 FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
 				Parent root = loader.load();

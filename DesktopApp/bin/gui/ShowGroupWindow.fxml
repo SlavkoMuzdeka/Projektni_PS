@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="781.0" prefWidth="1287.0" style="-fx-background-color: EEE2F6;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowGroupWindowController">
+<BorderPane fx:id="borderPaneMain" prefHeight="781.0" prefWidth="1287.0" style="-fx-background-color: EEE2F6;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowGroupWindowController">
    <center>
       <AnchorPane fx:id="paneShowGroup" prefHeight="712.0" prefWidth="1002.0" style="-fx-background-color: EEE2F6;">
          <children>

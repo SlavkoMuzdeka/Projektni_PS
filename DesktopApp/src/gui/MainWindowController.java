@@ -262,9 +262,9 @@ public class MainWindowController implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowAccountWindow.fxml"));
 			Pane pane = loader.load();
 			ShowAccountWindowController controller = loader.getController();
-			LogInService logInService = LogInService.getInstance();
-			Account account = logInService.getAccount();	
-			controller.setFields(account);
+	//		LogInService logInService = LogInService.getInstance();
+	//		Account account = logInService.getAccount();	
+	//		controller.setFields(account);
 			
 			borderPaneMainPane.setCenter(pane);
 		

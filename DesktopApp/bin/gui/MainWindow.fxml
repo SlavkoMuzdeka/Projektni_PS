@@ -34,6 +34,30 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Button fx:id="btnChildEvidencyPresence" mnemonicParsing="false" onAction="#btnChildEvidencyPresenceClick" prefHeight="60.0" prefWidth="278.0" text="Evidentiranje prisustva " textFill="#fffcfc">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="34.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/evidencijaPrisustva.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnChildrenRecords" mnemonicParsing="false" onAction="#btnChildrenRecordsClick" prefHeight="60.0" prefWidth="291.0" text="Pregled djece             " textFill="#fffcfc">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/pregled.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                         <Button fx:id="btnEducators" mnemonicParsing="false" onAction="#btnEducatorsClick" prefHeight="60.0" prefWidth="291.0" text="Vaspitači                   " textFill="#fffcfc">
                            <font>
                               <Font name="Verdana" size="18.0" />
@@ -57,30 +81,6 @@
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../icons/dolar.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnChildEvidencyPresence" mnemonicParsing="false" onAction="#btnChildEvidencyPresenceClick" prefHeight="60.0" prefWidth="278.0" text="Evidentiranje prisustva " textFill="#fffcfc">
-                           <font>
-                              <Font name="Verdana" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="34.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/evidencijaPrisustva.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnChildrenRecords" mnemonicParsing="false" onAction="#btnChildrenRecordsClick" prefHeight="60.0" prefWidth="291.0" text="Pregled djece             " textFill="#fffcfc">
-                           <font>
-                              <Font name="Verdana" size="18.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/pregled.png" />
                                  </image>
                               </ImageView>
                            </graphic>

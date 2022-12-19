@@ -1,7 +1,9 @@
 package gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -13,35 +15,31 @@ public class ShowEducatorWindowController {
 
 	    @FXML
 	    private HBox hBoxHorizontalEducators;
-
-	    @FXML
-	    private Label lblNumber;
-
-	    @FXML
-	    private Label lblDateOfBirth;
-
-	    @FXML
-	    private Label lblCity;
-
-	    @FXML
-	    private Label lblGroup;
-
-	    @FXML
-	    private Label lblNameAndSurname;
-
-	    @FXML
-	    private Label lblUID;
-
+	 
 	    @FXML
 	    private Label lblLogo;
 
 	    @FXML
-	    private Label lblStreet;
-
-	    @FXML
-	    private Label lblWindowName;
+	    private DatePicker dateOfBirth;
 
 	    @FXML
 	    private Pane paneHorizontal;
+	    
+	    @FXML
+	    private TextField txtFieldCity;
+
+	    @FXML
+	    private TextField txtFieldNameAndSurname;
+
+	    @FXML
+	    private TextField txtFieldNumber;
+
+	    @FXML
+	    private TextField txtFieldStreet;
+
+	    @FXML
+	    private TextField txtFieldUID;
+	    
+	    
 	
 }

@@ -125,16 +125,6 @@ public class CreateGroupWindowController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		listViewListChildren.getItems().add("Dijete");
-		listViewListChildren.setCellFactory(param -> new ChildCell());
-		listViewListEducators.getItems().add("Vaspitac");
-		listViewListEducators.setCellFactory(param -> new EducatorCell());
-
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int i = 1; i < 50; i++)
-			list.add(i);
-
-		cmbBoxNumberOfGroupMembers.getItems().addAll(list);
 	}
 
 	@FXML
