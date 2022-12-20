@@ -7,11 +7,15 @@ public class ArrivalAndDeparatureTime {
 	private String idChild;
 	private String recordedTime;
 	private boolean type;
-	
+
 	public ArrivalAndDeparatureTime(String recordedTime, boolean type) {
 		super();	
 		this.recordedTime = recordedTime;
 		this.type = type;
+	}
+	
+	public ArrivalAndDeparatureTime() {
+		
 	}
 
 	public String getId() {

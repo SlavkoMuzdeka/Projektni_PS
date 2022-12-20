@@ -8,10 +8,12 @@ public class Membership {
 	private int amount;
 	private boolean paid;
 	private String date;
-	private int idChild;
 	private String paymentDate;
+	private String idChild;
+	private Child child;
+
 	
-	public Membership(int id, String serviceType, int amount, boolean paid, String date, int idChild,
+	public Membership(int id, String serviceType, int amount, boolean paid, String date,
 			String paymentDate) {
 		super();
 		this.id = id;
@@ -19,7 +21,6 @@ public class Membership {
 		this.amount = amount;
 		this.paid = paid;
 		this.date = date;
-		this.idChild = idChild;
 		this.paymentDate = paymentDate;
 	}
 	
@@ -66,20 +67,28 @@ public class Membership {
 		this.date = date;
 	}
 
-	public int getIdChild() {
-		return idChild;
-	}
-
-	public void setIdChild(int idChild) {
-		this.idChild = idChild;
-	}
-
 	public String getPaymentDate() {
 		return paymentDate;
 	}
 
 	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
+	}
+
+	public String getIdChild() {
+		return idChild;
+	}
+
+	public void setIdChild(String idChild) {
+		this.idChild = idChild;
+	}
+
+	public Child getChild() {
+		return child;
+	}
+
+	public void setChild(Child child) {
+		this.child = child;
 	}
 	
 }

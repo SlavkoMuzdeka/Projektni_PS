@@ -58,8 +58,8 @@ public class LogInWindowController {
 			stage.setTitle("e-Vrtic");
 			
 //			if(!account.isAdministrator()) {
-	    		MainWindowController controller = loader.getController();
-	    		controller.setButtonsToFalse();
+	    	//	MainWindowController controller = loader.getController();
+	    	//	controller.setButtonsToFalse();
 //			}	
 			stage.show();
 			Stage s = (Stage)(((Node) event.getSource()).getScene().getWindow());

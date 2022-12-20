@@ -2,9 +2,12 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +27,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import model.Child;
 import model.Group;
+import service.GroupService;
 
 public class GroupsWindowController implements Initializable {
 
+	private ArrayList<Group> groups = new ArrayList<>();
+	private static GroupService groupService = GroupService.getInstance();
+	
 	@FXML
 	private GridPane GridPaneGroups;
 
@@ -41,12 +49,12 @@ public class GroupsWindowController implements Initializable {
     private Button btnRefresh;
 
 	@FXML
-	private ListView<String> listViewGroups;// Umjesto String ici ce Group
+	private ListView<Group> listViewGroups;
 
 	@FXML
 	private GridPane paneHorizontal;
 	
-    static class Cell extends ListCell<String> {  
+    static class Cell extends ListCell<Group> {  
         HBox hbox = new HBox();
     	 Button button = new Button("Ukloni");
     	 Label label = new Label("");
@@ -59,11 +67,13 @@ public class GroupsWindowController implements Initializable {
         	button.setStyle("-fx-background-color: #ffe6ff");
         	button.setOnAction(event -> {
         		
-        		CustomizedAlert ca = new CustomizedAlert(AlertType.CONFIRMATION,  "Da li ste sigurni da želite ukloniti grupu?","Uklanjanje člana");
+        		CustomizedAlert ca = new CustomizedAlert(AlertType.CONFIRMATION,  "Da li ste sigurni da Å¾elite ukloniti grupu?","Uklanjanje Ä�lana");
 				
 				 Optional<ButtonType> option = ca.showAndWait();
 		    	 if(option.get() ==  ButtonType.YES) {
-		    		 //ako je ok dodati uklanjanje iz grupe
+		 
+		    		 Group group = getItem();
+		    		 groupService.delete(group.getId());
 		    	 }
         		
 				System.out.println(getItem());
@@ -75,12 +85,12 @@ public class GroupsWindowController implements Initializable {
         }
 
 		@Override
-		public void updateItem(final String item, boolean empty) {
+		public void updateItem(final Group item, boolean empty) {
 			super.updateItem(item, empty);
 			setText(null);
 			setGraphic(null);
 			if (item != null && !empty) {
-				label.setText(item);
+				label.setText(item.getName());
 				setGraphic(hbox);
 			}
 
@@ -93,7 +103,12 @@ public class GroupsWindowController implements Initializable {
 		// TODO Auto-generated method stub
 
 		listViewGroups.setCellFactory(param -> new Cell());
-		listViewGroups.getItems().add("Grupa");
+		//groups.addAll( (ArrayList<Group>)groupService.getAll(""));
+		Group grupa = new Group();
+		grupa.setName("grupa1");
+		groups.add(grupa);
+		listViewGroups.getItems().addAll(groups);
+		//listViewGroups.getItems().add("Grupa");
 
 	}
 

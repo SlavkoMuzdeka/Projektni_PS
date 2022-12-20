@@ -7,6 +7,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import gui.Main;
+import model.Child;
 import model.Membership;
 
 public class MembershipFeesService implements IServiceable{
@@ -28,7 +29,7 @@ public class MembershipFeesService implements IServiceable{
 	}
 
 	@Override
-	public Boolean addOne(Object item) {
+	public Boolean addOne(Object item) {                                //ne postoji trenutno
 		String searchQueryApi = Main.URL + Main.membershipFees_URL;
 		Membership membership = (Membership) item;
 		JSONObject jsonObject = new JSONObject();
@@ -38,7 +39,8 @@ public class MembershipFeesService implements IServiceable{
 		jsonObject.put("paymentDate",membership.getPaymentDate());
 		jsonObject.put("date", membership.getDate());
 		jsonObject.put("paid", membership.isPaid());
-		jsonObject.put("idChild" , membership.getIdChild()); //provjeriti
+		Child child = new Child();
+		//jsonObject.put("idChild" , membership.getIdChild()); //provjeriti
 		
 		Integer statusCode = 0;
 
@@ -92,8 +94,10 @@ public class MembershipFeesService implements IServiceable{
 	            membership.setDate(object.getString("date"));
 	            membership.setAmount(object.getInt("amount"));
 	            membership.setPaymentDate(object.getString("paymentDate"));
-	            //treba jos ime i prezime djeteta kako tome pristupiti preko id ili da bude Child u klasi Membership
-	            //mjesec postoji na gui-ju ali ne bazi
+	            Child child = new Child();
+	            child.setName(object.getString("name"));
+	            child.setSurname(object.getString("surname"));
+	            membership.setChild(child);
 	            membershipsList.add(membership);
 		 }
 		 

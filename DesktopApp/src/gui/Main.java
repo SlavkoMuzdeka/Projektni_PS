@@ -23,6 +23,7 @@ public class Main extends Application{
 	public static final String logIn_URL = "";
 	public static final String membershipFees_URL= "";
 	public static final String monthlyExpenses_URL = "";
+	public static final String arrivalAndDepartureTime_URL="";
 	public static ArrayList<String> listaVaspitaca = new ArrayList<String>();//lista u koju se dodaju vaspitaci kad se kreiraju(tacnije ime i prezime vaspitaca String)
 	public static ArrayList<String> listaGrupa = new ArrayList<String>();//lista u koju se dodaju grupe kad se kreiraju(tacnije naziv grupe tipa String)
 	public static ArrayList<Child> listChildren = new ArrayList<Child>();

@@ -26,6 +26,8 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import model.Child;
 import model.Educator;
+import model.Group;
+import service.GroupService;
 
 public class CreateGroupWindowController implements Initializable {
 
@@ -130,10 +132,14 @@ public class CreateGroupWindowController implements Initializable {
 	@FXML
 	void btnCreateGroupClick(ActionEvent event) {
 
-		
 		//liste proslijediti sevisu i nakon toga obrisati ih
-		listEducatrosAddingInGroup.removeAll(listEducatrosAddingInGroup);
-		listChildrenAddingInGroup.removeAll(listChildrenAddingInGroup);
+	/*	listEducatrosAddingInGroup.removeAll(listEducatrosAddingInGroup);
+		listChildrenAddingInGroup.removeAll(listChildrenAddingInGroup);*/    //ovo ne treba
+		
+		Group group = new Group();
+		group.setName(txtFieldGroupName.getText());
+		GroupService groupService = GroupService.getInstance();
+		groupService.addOne(group);
 	}
 
 }

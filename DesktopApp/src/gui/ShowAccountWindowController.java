@@ -78,6 +78,11 @@ public class ShowAccountWindowController implements Initializable{
     
 	public void setFields(Account account) {
 		
+		txtFieldNameAndSurname.setText(account.getName() + " " + account.getSurname());
+		txtFieldUserName.setText(account.getUsername());
+		txtFieldCity.setText(account.getAddress().getCity());
+		txtFieldStreet.setText(account.getAddress().getStreet());
+		txtFieldNumber.setText(account.getAddress().getNumber());
 		
 	}
     

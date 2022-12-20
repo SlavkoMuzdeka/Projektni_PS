@@ -16,6 +16,17 @@ import model.Child;
 
 public class ChildrenRecordsService implements IServiceable {
 
+
+	public static ChildrenRecordsService instance = null;
+
+	public static ChildrenRecordsService getInstance() {
+		if (instance == null) {
+
+			return new ChildrenRecordsService();
+		}
+		return instance;
+	}
+
 	@Override
 	public Boolean addAll(Object items) {   //ako se posalje lista u kojoj su vec smjesteni podaci isHere
 		

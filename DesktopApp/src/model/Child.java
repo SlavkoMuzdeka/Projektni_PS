@@ -130,6 +130,9 @@ public class Child extends Person{
 		this.arrivalAndDeparatureTime = arrivalAndDeparatureTime;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return getName() + "  " + getSurname();
+	}
 	
 }
