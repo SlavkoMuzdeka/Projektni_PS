@@ -1,7 +1,13 @@
 package project.model;
 
-public class MedicalClearance {
+import java.io.Serializable;
 
+public class MedicalClearance implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5174413934120515312L;
 	private int id;
 	private int idPerson;
 	private byte[] file;

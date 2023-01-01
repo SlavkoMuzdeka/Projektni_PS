@@ -1,7 +1,13 @@
 package project.model;
 
-public class Kindergarten {
+import java.io.Serializable;
+
+public class Kindergarten implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4283579465212782613L;
 	private String name;
 	private String phoneNumber;
 	private Address address;

@@ -1,10 +1,14 @@
 package project.model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Child extends Person {
+public class Child extends Person implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6537099018792454135L;
 	private String fatherName;
 	private String motherName;
 	private String fatherPhoneNumber;

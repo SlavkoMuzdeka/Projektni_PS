@@ -1,9 +1,14 @@
 package project.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Group {
+public class Group implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4908440154417014655L;
 	private int id;
 	private String name;
 	private int numberOfMembers;
@@ -20,6 +25,10 @@ public class Group {
 		this.children = children;
 		this.educators = educators;
 		this.activities = activities;
+	}
+	
+	public Group() {
+		super();
 	}
 
 	public int getId() {

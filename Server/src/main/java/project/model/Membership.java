@@ -1,9 +1,14 @@
 package project.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Membership {
+public class Membership implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2774838559682528722L;
 	private int id;
 	private String serviceType;
 	private int amount;

@@ -1,9 +1,14 @@
 package project.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Educator extends Person {
+public class Educator extends Person implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1596610363448810830L;
 	private String username;
 	private String password;
 	private int plata;

@@ -1,9 +1,14 @@
 package project.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class ArrivalAndDeparatureTime {
+public class ArrivalAndDeparatureTime implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 831652614619995802L;
 	private String id;
 	private String idChild;
 	private LocalDateTime recordedTime;

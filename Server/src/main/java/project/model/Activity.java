@@ -1,20 +1,29 @@
 package project.model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.util.Date;
 
-public class Activity {
+public class Activity implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1920945254066907435L;
 	private int id;
 	private String name;
 	private String description;
 	private int idGroup;
-	private LocalDate date;
+	private Date date;
 	
 	public Activity(int id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+	}
+	
+	public Activity() {
+		super();
 	}
 
 	public int getId() {
@@ -49,11 +58,11 @@ public class Activity {
 		this.idGroup = idGroup;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

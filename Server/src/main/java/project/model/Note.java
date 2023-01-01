@@ -1,7 +1,13 @@
 package project.model;
 
-public class Note {
+import java.io.Serializable;
+
+public class Note implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3289625183032193348L;
 	private int id;
 	private int idChild;
 	private String description;

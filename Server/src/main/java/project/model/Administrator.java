@@ -1,9 +1,13 @@
 package project.model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Administrator extends Person {
+public class Administrator extends Person implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6007056845655156150L;
 	private String username;
 	private String password;
 	

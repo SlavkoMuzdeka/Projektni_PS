@@ -1,7 +1,6 @@
 package project.data;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,12 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
-
 import project.model.Address;
 import project.model.Child;
 import project.model.Note;
+import project.pool.ConnectionPool;
 
 public class ChildDataSource {
+	
+	private static final String SELECT_ALL_FROM_GROUP = "{call get_children_from_group(?)}";
 
 	private static final String DB_URL = "jdbc:mysql://10.1.0.252:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	private static ChildDataSource instance = null;
@@ -225,5 +226,51 @@ public class ChildDataSource {
 
 	private ChildDataSource() {
 		super();
+	}
+	
+	public ArrayList<Child> getChildrenFromGroup(int groupId){
+		ArrayList<Child> children = new ArrayList<>();
+		Connection c = null;
+		CallableStatement cs = null;
+		ResultSet rs =null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			cs = c.prepareCall(SELECT_ALL_FROM_GROUP);
+			cs.setInt(1, groupId);
+			rs = cs.executeQuery();
+			while(rs.next()) {
+				Child child = new Child();
+				child.setId(rs.getString(1));
+				child.setUid(rs.getString(2));
+				child.setName(rs.getString(3));
+				child.setSurname(rs.getString(4));
+				child.setDateOfBirth(rs.getString(5));
+				
+				Address address = new Address();
+				address.setStreet(rs.getString(6));
+				address.setCity(rs.getString(7));
+				address.setNumber(rs.getString(8));
+				
+				child.setAddress(address);
+				child.setHeight(rs.getString(9));
+				child.setWeight(rs.getString(10));
+				child.setFatherName(rs.getString(11));
+				child.setMotherName(rs.getString(12));
+				child.setFatherPhoneNumber(rs.getString(13));
+				child.setMotherPhoneNumber(rs.getString(14));
+				
+				Note note = new Note();
+				note.setDescription(rs.getString(15));
+								
+				child.setNote(note);
+				
+				children.add(child);
+			}
+		}catch(Exception ex) {
+			return null;
+		}finally {
+			ConnectionPool.close(c,cs,rs);
+		}
+		return children;
 	}
 }

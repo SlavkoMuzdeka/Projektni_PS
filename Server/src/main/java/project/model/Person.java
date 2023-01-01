@@ -1,9 +1,13 @@
 package project.model;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Person {
+public class Person implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1543662042000371192L;
 	private String name;
 	private String surname;
 	private String uid;

@@ -1,9 +1,14 @@
 package project.model;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class HygieneTest {
+public class HygieneTest implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7293896044464782702L;
 	private int id;
 	private int idPerson;
 	private File document;

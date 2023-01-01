@@ -1,9 +1,14 @@
 package project.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Bill {
+public class Bill implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8471861281587332419L;
 	private String billNumber; // pitati
 	private String billType;
 	private int amount;
