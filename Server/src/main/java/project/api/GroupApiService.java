@@ -41,6 +41,29 @@ public class GroupApiService {
 		}
 	}
 	
+	@POST
+	@Path("/{groupId}/child/{childId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response insertChild(@PathParam("groupId") Integer groupId, @PathParam("childId") Integer childId) {
+		if(groupService.insertIntoGroup(groupId, childId, true)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(404).build();//TODO PROMIJENITI STATUSNI KOD
+		}
+	}
+	
+	@POST
+	@Path("/{groupId}/educator/{educatorId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response insertEducator(@PathParam("groupId") Integer groupId, @PathParam("educatorId") Integer educatorId) {
+		if(groupService.insertIntoGroup(groupId, educatorId, false)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(404).build();//TODO PROMIJENITI STATUSNI KOD
+		}
+	}
 	
 	
 }

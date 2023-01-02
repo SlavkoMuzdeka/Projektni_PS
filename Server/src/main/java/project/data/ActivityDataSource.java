@@ -4,9 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 
 import project.model.Activity;
 import project.pool.ConnectionPool;
@@ -32,7 +30,7 @@ public class ActivityDataSource {
 		ArrayList<Activity> activities = new ArrayList<>();
 		Connection c = null;
 		CallableStatement cs = null;
-		ResultSet rs =null;
+		ResultSet rs = null;
 		try {
 			c = ConnectionPool.getInstance().checkOut();;
 			cs = c.prepareCall(SELECT_ALL_FROM_GROUP);
