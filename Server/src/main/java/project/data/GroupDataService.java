@@ -19,6 +19,7 @@ public class GroupDataService {
 	private static final String SELECT_ALL = "SELECT * FROM grupa";
 	private static final String SELECT_ONE = "SELECT * FROM grupa WHERE IdGrupe = ?";
 	private static final String INSERT_INTO_GROUP = "{call add_person_to_group(?, ?, ?, ?)}";
+	private static final String DELETE_FROM_GROUP = "{call delete_person_from_group(?, ?, ?, ?)}";
 	
 	private static GroupDataService instance = null;
 	
@@ -81,13 +82,36 @@ public class GroupDataService {
 		return group;
 	}
 	
-	public Boolean insertIntoGroup(int groupId, int childId, boolean type) {
+	public Boolean insertIntoGroup(int groupId, int personId, boolean type) {
 		Connection c = null;
 		CallableStatement cs = null;
 		try {
 			c = ConnectionPool.getInstance().checkOut();
 			cs = c.prepareCall(INSERT_INTO_GROUP);
-			cs.setInt(1, childId);
+			cs.setInt(1, personId);
+			cs.setInt(2, groupId);
+			if(type) {
+				cs.setInt(3, 0);
+			}else {
+				cs.setInt(3, 1);
+			}
+			cs.registerOutParameter(4, Types.BOOLEAN);
+			cs.executeUpdate();
+			return cs.getBoolean(4);
+		}catch(Exception ex) {
+			return false;
+		}finally {
+			ConnectionPool.close(c, cs, null);
+		}
+	}
+	
+	public Boolean deleteFromGroup(int groupId, int personId, boolean type) {
+		Connection c = null;
+		CallableStatement cs = null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			cs = c.prepareCall(DELETE_FROM_GROUP);
+			cs.setInt(1, personId);
 			cs.setInt(2, groupId);
 			if(type) {
 				cs.setInt(3, 0);

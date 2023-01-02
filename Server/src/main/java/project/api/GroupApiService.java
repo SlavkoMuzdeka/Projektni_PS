@@ -64,6 +64,30 @@ public class GroupApiService {
 			return Response.status(404).build();//TODO PROMIJENITI STATUSNI KOD
 		}
 	}
+		
+	@DELETE
+	@Path("/{groupId}/child/{childId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteChild(@PathParam("groupId") Integer groupId, @PathParam("childId") Integer childId) {
+		if(groupService.deleteFromGroup(groupId, childId, true)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(404).build();//TODO PROMIJENITI STATUSNI KOD
+		}
+	}
+	
+	@DELETE
+	@Path("/{groupId}/educator/{educatorId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteEducator(@PathParam("groupId") Integer groupId, @PathParam("educatorId") Integer educatorId) {
+		if(groupService.deleteFromGroup(groupId, educatorId, false)) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(404).build();//TODO PROMIJENITI STATUSNI KOD
+		}
+	}
 	
 	
 }
