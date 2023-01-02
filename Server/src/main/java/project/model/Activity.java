@@ -1,7 +1,6 @@
 package project.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Activity implements Serializable{
 
@@ -13,7 +12,8 @@ public class Activity implements Serializable{
 	private String name;
 	private String description;
 	private int idGroup;
-	private Date date;
+	private String date;
+	private int duration;
 	
 	public Activity(int id, String name, String description) {
 		super();
@@ -58,14 +58,20 @@ public class Activity implements Serializable{
 		this.idGroup = idGroup;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
-	
-	
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
 	
 }

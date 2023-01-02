@@ -2,12 +2,12 @@ package project.data;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
-
 import project.model.Activity;
 import project.model.Child;
 import project.model.Educator;
@@ -20,6 +20,8 @@ public class GroupDataService {
 	private static final String SELECT_ONE = "SELECT * FROM grupa WHERE IdGrupe = ?";
 	private static final String INSERT_INTO_GROUP = "{call add_person_to_group(?, ?, ?, ?)}";
 	private static final String DELETE_FROM_GROUP = "{call delete_person_from_group(?, ?, ?, ?)}";
+	private static final String CREATE_GROUP = "{call create_group(?, ?)}";
+	private static final String ADD_ACTIVITY_INTO_GROUP = "call add_activity_to_group(?, ?, ?, ?, ?)";
 	
 	private static GroupDataService instance = null;
 	
@@ -128,4 +130,47 @@ public class GroupDataService {
 		}
 	}
 	
+	public Boolean createGroup(String groupName) {
+		Connection c = null;
+		CallableStatement cs = null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			cs = c.prepareCall(CREATE_GROUP);
+			cs.setString(1, groupName);
+			cs.registerOutParameter(2, Types.BOOLEAN);
+			cs.executeUpdate();
+			return cs.getBoolean(2);
+		}catch(Exception ex) {
+			return false;
+		}finally {
+			ConnectionPool.close(c, cs, null);
+		}
+	}
+	
+	public Boolean addActivityToGroup(Activity activity, int groupId) {
+		int activityId = activityService.createActivity(activity.getName(), activity.getDescription());
+		if(activityId != 0) {
+			Connection c = null;
+			CallableStatement cs = null;
+			try {
+				c = ConnectionPool.getInstance().checkOut();
+				cs = c.prepareCall(ADD_ACTIVITY_INTO_GROUP);
+				cs.setInt(1, activityId);
+				cs.setInt(2, groupId);
+				cs.setDate(3, Date.valueOf(activity.getDate()));
+				cs.setInt(4, activity.getDuration());
+				cs.registerOutParameter(5, Types.BOOLEAN);
+				cs.executeUpdate();
+				return cs.getBoolean(5);
+			}catch(Exception ex) {
+				System.out.println("greksa1");
+				return false;
+			}finally {
+				ConnectionPool.close(c, cs, null);
+			}
+		}
+		return false;
+	}
+	
+	//TODO URADITI BRISANJE AKTIVNOSTI IZ GRUPE
 }

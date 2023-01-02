@@ -12,10 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import org.json.JSONObject;
 import project.data.ChildDataSource;
-import project.data.ChildEvidenceDataSource;
 import project.model.Address;
 import project.model.Child;
 import project.model.MedicalClearance;
