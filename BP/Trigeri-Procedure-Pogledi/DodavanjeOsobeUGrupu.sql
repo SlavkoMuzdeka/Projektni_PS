@@ -1,7 +1,4 @@
-use projektni_ps;
-
-delimiter $$
-create procedure add_person_to_group (
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_person_to_group`(
 	in id_osobe INT, 
 	   id_grupe INT,
        tip_osobe bool,
@@ -17,5 +14,4 @@ begin
 		insert into dijete_has_grupa values (id_osobe, id_grupe);
         set je_dodana = true;
 	end if;
-end$$
-delimiter ;
+end

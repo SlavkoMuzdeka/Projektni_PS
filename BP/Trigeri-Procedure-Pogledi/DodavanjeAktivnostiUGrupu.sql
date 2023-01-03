@@ -1,7 +1,4 @@
-use projektni_ps;
-
-delimiter $$
-create procedure add_activity_to_group (
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_activity_to_group`(
 	in id_aktivnosti INT,
        id_grupe INT,
        datum_aktivnosti DATE,
@@ -13,9 +10,4 @@ begin
 	insert into aktivnost_has_grupa values(id_aktivnosti, id_grupe,datum_aktivnosti, trajanje_aktivnosti);
 	set je_dodana = true;
     
-end$$
-delimiter ;
-
-
-call add_activity_to_group(1, 1, DATE(NOW()), 2, @vrijednost);
-select @vrijednost
+end

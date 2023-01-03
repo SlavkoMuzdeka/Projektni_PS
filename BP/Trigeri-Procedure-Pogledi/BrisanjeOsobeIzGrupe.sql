@@ -1,7 +1,4 @@
-use projektni_ps;
-
-delimiter $$
-create procedure delete_person_from_group (
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_person_from_group`(
 	in id_osobe INT,
 	   id_grupe INT,
        tip_osobe INT,
@@ -17,5 +14,4 @@ begin
         set obrisan_status = true;
 	end if;
         
-end$$
-delimiter ;
+end

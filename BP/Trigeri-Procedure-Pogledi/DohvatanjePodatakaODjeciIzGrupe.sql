@@ -1,16 +1,15 @@
-use projektni_ps;
-
-delimiter $$
-create procedure get_childrens_from_group(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_children_from_group`(
 	in id_grupe INT
 )
 begin
-	select OSOBA_IdOsobe,JMB,Ime,Prezime,DatumRodjenja,Ulica,Grad,Broj,Visina,Tezina,ImeOca,ImeMajke,BrojTelefonaOca,BrojTelefonaMajke, Prisutno
-    from osoba o,dijete d,grupa g,dijete_has_grupa dg,adresa adr
-    where o.IdOsobe = d.OSOBA_IdOsobe
-		and g.IdGrupe = dg.GRUPA_IdGrupe
-        and adr.IdAdrese = o.ADRESA_IdAdrese
-        and d.OSOBA_IdOsobe = dg.DIJETE_OSOBA_IdOsobe
-        and g.IdGrupe = id_grupe;
-end$$
-delimiter ;
+
+	select o.IdOsobe, o.JMB, o.Ime, o.Prezime, o.DatumRodjenja, Ulica, Grad, Broj, Visina, Tezina, ImeOca, ImeMajke, BrojTelefonaOca, BrojTelefonaMajke, OpisNapomene
+    from osoba o
+    inner join dijete d on o.IdOsobe=d.OSOBA_IdOsobe
+    inner join ADRESA a on o.ADRESA_IdAdrese=a.IdAdrese
+    inner join dijete_has_grupa dg on dg.DIJETE_OSOBA_IdOsobe = o.IdOsobe
+    inner join grupa g on g.IdGrupe = dg.GRUPA_IdGrupe
+    left outer join NAPOMENA on dg.DIJETE_OSOBA_IdOsobe=d.OSOBA_IdOsobe
+    where aktivan is true AND g.IdGrupe = id_grupe;
+
+end
