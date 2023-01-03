@@ -3,8 +3,10 @@ package project.data;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ import project.pool.ConnectionPool;
 
 public class EducatorsDataSource {
 	
+	private static final String SELECT_ALL = "SELECT * FROM prikaz_vaspitaca";
+	private static final String SELECT_ONE = "SELECT * FROM prikaz_vaspitaca WHERE OSOBA_IdOsobe = ?";
 	private static final String SELECT_ALL_FROM_GROUP = "{call get_vaspitaci_from_group(?)}";
 
 	private static final String DB_URL = "jdbc:mysql://10.1.0.252:3306/projektni_ps?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -51,6 +55,62 @@ public class EducatorsDataSource {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public ArrayList<Educator> readAll(){
+		ArrayList<Educator> educators = new ArrayList<>();
+		Connection c = null;
+		Statement s = null;
+		ResultSet rs = null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			s = c.createStatement();
+			rs = s.executeQuery(SELECT_ALL);
+			while (rs.next()) {
+				Educator e = new Educator();
+				e.setId(String.valueOf(rs.getInt(1)));
+				e.setName(rs.getString(3));
+				e.setSurname(rs.getString(4));
+				educators.add(e);
+			}
+		}catch(Exception ex) {
+			return null;
+		}finally {
+			ConnectionPool.close(c, s, rs);
+		}
+		return educators;
+	}
+	
+	public Educator readOne(Integer educatorId) {
+		Connection c = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Educator educator = null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			ps = c.prepareStatement(SELECT_ONE);
+			ps.setInt(1, educatorId);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				educator = new Educator();
+				educator.setId(String.valueOf(rs.getInt(1)));
+				educator.setName(rs.getString(3));
+				educator.setSurname(rs.getString(4));
+				educator.setDateOfBirth(rs.getDate(5).toString());
+				educator.setUid(rs.getString(2));
+				
+				Address adr = new Address();
+				adr.setCity(rs.getString(7));
+				adr.setNumber(String.valueOf(rs.getInt(8)));
+				adr.setStreet(rs.getString(6));
+				educator.setAddress(adr);
+			}
+		}catch(Exception ex) {
+			return null;
+		}finally {
+			ConnectionPool.close(c, ps, rs);
+		}
+		return educator;
 	}
 	
 	public ArrayList<Educator> getEducatorsFromGroup(int groupId){
