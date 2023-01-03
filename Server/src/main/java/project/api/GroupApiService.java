@@ -127,4 +127,16 @@ public class GroupApiService {
 		return Response.status(404).build();
 	}
 	
+	@PUT
+	@Path("/{groupId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateNameOfGroup(String jsonObject, @PathParam("groupId") int groupId) {
+		JSONObject jsonO = new JSONObject(jsonObject);
+		System.out.println(jsonO.getString("name"));
+		if(groupService.update(jsonO.getString("name"), groupId)) {
+			return Response.status(200).build();
+		}
+		return Response.status(404).build();
+	}
+	
 }

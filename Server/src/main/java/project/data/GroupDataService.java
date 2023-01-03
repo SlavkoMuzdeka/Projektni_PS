@@ -23,6 +23,7 @@ public class GroupDataService {
 	private static final String CREATE_GROUP = "{call create_group(?, ?)}";
 	private static final String DELETE_GROUP = "UPDATE grupa SET Aktivna = 0 WHERE IdGrupe = ?";
 	private static final String ADD_ACTIVITY_INTO_GROUP = "call add_activity_to_group(?, ?, ?, ?, ?)";
+	private static final String UPDATE_GROUP_NAME = "UPDATE grupa SET NazivGrupe = ? WHERE IdGrupe = ?";
 	
 	private static GroupDataService instance = null;
 	
@@ -182,8 +183,23 @@ public class GroupDataService {
 			ps.setInt(1, groupId);
 			ps.executeUpdate();
 		}catch(Exception ex) {
-			System.out.println("Ovde se desila greska: ");
-			ex.printStackTrace();
+			return false;
+		}finally {
+			ConnectionPool.close(c, ps, null);
+		}
+		return true;
+	}
+	
+	public Boolean update(String groupName, int groupId) {
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			ps = c.prepareStatement(UPDATE_GROUP_NAME);
+			ps.setString(1, groupName);
+			ps.setInt(2, groupId);
+			ps.executeUpdate();
+		}catch(Exception ex) {
 			return false;
 		}finally {
 			ConnectionPool.close(c, ps, null);
