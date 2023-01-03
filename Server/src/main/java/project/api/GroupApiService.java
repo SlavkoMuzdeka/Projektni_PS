@@ -117,6 +117,14 @@ public class GroupApiService {
 		return Response.status(404).build();
 	}
 	
-	//TODO URADITI BRISANJE AKTIVNOSTI IZ GRUPE
+	@DELETE
+	@Path("/{groupId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteGroup(@PathParam("groupId") int groupId) {
+		if(groupService.delete(groupId)) {
+			return Response.status(200).build();
+		}
+		return Response.status(404).build();
+	}
 	
 }

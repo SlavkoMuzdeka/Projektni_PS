@@ -16,11 +16,12 @@ import project.pool.ConnectionPool;
 
 public class GroupDataService {
 	
-	private static final String SELECT_ALL = "SELECT * FROM grupa";
+	private static final String SELECT_ALL = "SELECT * FROM grupa WHERE Aktivna = 1";
 	private static final String SELECT_ONE = "SELECT * FROM grupa WHERE IdGrupe = ?";
 	private static final String INSERT_INTO_GROUP = "{call add_person_to_group(?, ?, ?, ?)}";
 	private static final String DELETE_FROM_GROUP = "{call delete_person_from_group(?, ?, ?, ?)}";
 	private static final String CREATE_GROUP = "{call create_group(?, ?)}";
+	private static final String DELETE_GROUP = "UPDATE grupa SET Aktivna = 0 WHERE IdGrupe = ?";
 	private static final String ADD_ACTIVITY_INTO_GROUP = "call add_activity_to_group(?, ?, ?, ?, ?)";
 	
 	private static GroupDataService instance = null;
@@ -172,5 +173,21 @@ public class GroupDataService {
 		return false;
 	}
 	
-	//TODO URADITI BRISANJE AKTIVNOSTI IZ GRUPE
+	public Boolean delete(int groupId) {
+		Connection c = null;
+		PreparedStatement ps = null;
+		try {
+			c = ConnectionPool.getInstance().checkOut();
+			ps = c.prepareStatement(DELETE_GROUP);
+			ps.setInt(1, groupId);
+			ps.executeUpdate();
+		}catch(Exception ex) {
+			System.out.println("Ovde se desila greska: ");
+			ex.printStackTrace();
+			return false;
+		}finally {
+			ConnectionPool.close(c, ps, null);
+		}
+		return true;
+	}
 }
