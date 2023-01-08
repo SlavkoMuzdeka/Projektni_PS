@@ -14,6 +14,8 @@ public class Educator extends Person implements Serializable{
 	private int plata;
 	private LocalDate  selectionDate;
 	private int idGroup;
+	private MedicalClearance medicalClearance;
+	private HygieneTest hygieneTest;
 
 	public Educator() {
 		super();
@@ -64,6 +66,18 @@ public class Educator extends Person implements Serializable{
 
 	public void setIdGroup(int idGroup) {
 		this.idGroup = idGroup;
+	}
+	public MedicalClearance getMedicalClearance() {
+		return medicalClearance;
+	}
+	public void setMedicalClearance(MedicalClearance medicalClearance) {
+		this.medicalClearance = medicalClearance;
+	}
+	public HygieneTest getHygieneTest() {
+		return hygieneTest;
+	}
+	public void setHygieneTest(HygieneTest hygieneTest) {
+		this.hygieneTest = hygieneTest;
 	}
 	
 	
