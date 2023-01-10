@@ -1,0 +1,106 @@
+#PaneLogo {
+	-fx-background-image: url("../icons/hand6.png");
+}
+
+#paneVBox {
+	-fx-background-color: #600080;
+}
+
+
+.table-view .column-header {
+	-fx-background-color: #bf80ff;
+}
+
+.table-view .column-header:hover {
+	-fx-background-color: #df9fdf;
+}
+
+.table-view .column-header .label {
+	-fx-font-family: "Verdana";
+	-fx-font-size: 12px;
+	-fx-text-fill: white;
+}
+
+.button {
+	-fx-background-color: #600080;
+}
+
+.button:hover {
+	-fx-background-color: #df9fdf;
+}
+
+.combo-box:hover {
+	-fx-background-color: #df9fdf;
+}
+.scroll-pane .viewport {
+    -fx-background-color: #EEE2F6; /*or whatever you want*/
+  }
+.scroll-pane {
+  	-fx-background-color:#EEE2F6;
+}
+.button:focused {
+	-fx-backdrop-filter: blur(3px) saturate(142%);
+	-fx-webkit-backdrop-filter: blur(3px) saturate(142%);
+	-fx-border-radius: 1px;
+	-fx-border-color: #19171a;
+	-fx-opacity: 0.7;
+}
+
+#paneHorizontal {
+
+		-fx-background-color: linear-gradient(to right, transparent , #600080 , transparent );
+	
+		-fx-border-width:0px;
+			
+	   
+	
+-fx-border-style: solid;
+}
+#paneHorizontalListChildren{
+	-fx-background-image: url("../backgrounds/horizontal.png");
+}
+.text-area:hover{
+	-fx-background-color: #df9fdf;
+}
+.text-field:hover{
+	-fx-background-color: #df9fdf;
+}
+.text-field{
+	-fx-background-color: #f3f2f3;
+}
+
+.list-cell {
+	-fx-backdrop-filter: blur(3px) saturate(100%);
+	-fx-webkit-backdrop-filter: blur(3px) saturate(100%);
+	-fx-background-color: #faedf5;
+	-fx-border-radius: 2px;
+	-fx-border-color: #fae6ff;
+	-fx-border: 0px solid rgba(235, 153, 255, 0.125);
+	-fx-font-family: "Verdana";
+	-fx-font-size: 16px;
+	-fx-text-fill: black;
+}
+
+.list-cell:hover {
+	-fx-background-color: #E1E8E9;
+}
+
+.table-row-cell.table-cell {
+	-fx-text-fill: black;
+}
+
+.table-cell {
+	-fx-backdrop-filter: blur(3px) saturate(100%);
+	-fx-webkit-backdrop-filter: blur(3px) saturate(100%);
+	-fx-background-color: #F0ECF4;
+	-fx-border-radius: 2px;
+	-fx-border-color: #fae6ff;
+	-fx-border: 0px solid rgba(235, 153, 255, 0.125);
+	-fx-font-family: "Verdana";
+	-fx-font-size: 16px;
+	-fx-text-fill: black;
+}
+
+.table-cell:hover {
+	-fx-background-color: #E1E8E9;
+}

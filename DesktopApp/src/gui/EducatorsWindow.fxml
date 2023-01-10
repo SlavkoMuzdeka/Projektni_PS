@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="paneEducators" prefHeight="808.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EducatorsWindowController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="35.99999847412109" minHeight="10.0" prefHeight="19.199993515014647" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="159.20000648498535" minHeight="10.0" prefHeight="159.20000648498535" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane fx:id="paneHorizontal" GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <GridPane prefHeight="130.0" prefWidth="1023.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.20001220703125" minWidth="0.0" prefWidth="9.200018787384034" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="652.6" minWidth="10.0" prefWidth="418.4000366210937" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="595.7999633789062" minWidth="10.0" prefWidth="595.7999633789062" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label fx:id="lblWindowName" prefHeight="52.0" prefWidth="194.0" text="Vaspitači" textFill="WHITE" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="Verdana" size="36.0" />
+                                 </font>
+                              </Label>
+                              <GridPane prefHeight="130.0" prefWidth="358.0" GridPane.columnIndex="2">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.2000244140625" minWidth="10.0" prefWidth="339.2000244140625" />
+                                    <ColumnConstraints hgrow="NEVER" maxWidth="220.60002441406252" minWidth="10.0" prefWidth="56.79997558593749" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.599951171875" minWidth="10.0" prefWidth="180.399951171875" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="55.200009155273435" minHeight="10.0" prefHeight="55.200009155273435" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="35.60001220703125" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="61.600006103515625" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Button fx:id="btnAddEducator" mnemonicParsing="false" onAction="#btnAddEducatorClick" prefHeight="39.0" prefWidth="182.0" text="Dodaj vaspitača" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Verdana" size="14.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icons/white-plus-icon-3.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <padding>
+                                          <Insets bottom="1.0" left="11.0" right="1.0" />
+                                       </padding>
+                                    </Button>
+                                    <Button fx:id="btnRefresh" mnemonicParsing="false" onAction="#btnRefreshClick" prefHeight="39.0" prefWidth="50.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Verdana" size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets bottom="1.0" left="11.0" right="1.0" />
+                                       </padding>
+                                       <graphic>
+                                          <ImageView fitHeight="34.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icons/download.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+            <GridPane GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane prefHeight="598.0" prefWidth="926.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.39999389648438" minWidth="0.0" prefWidth="0.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1040.8001342773437" minWidth="10.0" prefWidth="1040.8001342773437" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.59997558593739" minWidth="4.79986572265625" prefWidth="4.79986572265625" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="49.799993896484374" minHeight="10.0" prefHeight="14.59997978210449" />
+                        <RowConstraints maxHeight="563.4000202178955" minHeight="10.0" prefHeight="552.8000793457031" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="563.4000202178955" minHeight="10.0" prefHeight="15.199920654296875" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="552.0" prefWidth="984.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <content>
+                              <ListView fx:id="listViewEducatorsWindow" accessibleRole="BUTTON" fixedCellSize="40.0" onMouseClicked="#listCellClicked" prefHeight="559.0" prefWidth="1010.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+     
+                  <Label fx:id="lblLogo" prefHeight="9.0" prefWidth="23.0" />
+   </children>
+</GridPane>
