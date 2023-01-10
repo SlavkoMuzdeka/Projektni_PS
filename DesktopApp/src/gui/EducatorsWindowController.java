@@ -3,7 +3,6 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import gui.ShowGroupWindowController.CellEducator;
@@ -15,11 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -27,20 +24,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-import model.Child;
-import model.Educator;
-import service.EducatorService;
 
 public class EducatorsWindowController implements Initializable{
 
-	private ArrayList<Educator> educatorsList = new ArrayList<>();
-	private static EducatorService educatorService = EducatorService.getInstance();
-	
+
     @FXML
     private GridPane paneEducators;
 
     @FXML
-    private ListView<Educator> listViewEducatorsWindow;
+    private ListView<String> listViewEducatorsWindow;
 
     @FXML
     private Button btnAddEducator;
@@ -61,7 +53,7 @@ public class EducatorsWindowController implements Initializable{
     private Pane paneHorizontal;
     
     
-    static class Cell extends ListCell<Educator> {  
+    static class Cell extends ListCell<String> {  
         HBox hbox = new HBox();
     	 Button button = new Button("Ukloni");
     	 Label label = new Label("");
@@ -74,16 +66,8 @@ public class EducatorsWindowController implements Initializable{
         	button.setStyle("-fx-background-color: #ffe6ff");
 			button.setOnAction(event -> {
 
-				CustomizedAlert ca = new CustomizedAlert(AlertType.CONFIRMATION, "",
-						"Da li ste sigurni da želite obrisati dijete?");
-			
-				Optional<ButtonType> option = ca.showAndWait();
-				if (option.get() == ButtonType.YES) {
-
-					Educator educator = getItem();
-					educatorService.delete(educator.getId());
-				}
-
+				//dodati uklanjanje iz grupe
+				System.out.println(getItem());
 
 			});
         	hbox.getChildren().addAll(label,pane,button);
@@ -91,12 +75,12 @@ public class EducatorsWindowController implements Initializable{
         }
 
 		@Override
-		public void updateItem(final Educator item, boolean empty) {
+		public void updateItem(final String item, boolean empty) {
 			super.updateItem(item, empty);
 			setText(null);
 			setGraphic(null);
 			if (item != null && !empty) {
-				label.setText(item.getName() + " " + item.getSurname());
+				label.setText(item);
 				setGraphic(hbox);
 			}
 
@@ -110,8 +94,7 @@ public class EducatorsWindowController implements Initializable{
 		
     	
     	//iz servisa listu vaspitaca uzeti i prikazati
-    	educatorsList.addAll((ArrayList<Educator>)educatorService.getAll(""));
-		listViewEducatorsWindow.getItems().addAll(educatorsList);
+		listViewEducatorsWindow.getItems().addAll(Main.listaVaspitaca);
 		listViewEducatorsWindow.setCellFactory(param -> new Cell());
 		
 	}
@@ -137,10 +120,7 @@ public class EducatorsWindowController implements Initializable{
 //	    System.out.println("clicked on " + event.getSource()+ "----------" + listViewEducatorsWindow.getSelectionModel().getSelectedItem()); //listViewEducatorsWindow.getSelectionModel().getSelectedItem() daje ime grupe
 		    if(listViewEducatorsWindow.getSelectionModel().getSelectedItem()!=null) {
 		    	 try {
-		    			FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowEducatorWindow.fxml"));
-						Pane pane = loader.load();
-						ShowEducatorWindowController controller = loader.getController();
-						controller.setFields(listViewEducatorsWindow.getSelectionModel().getSelectedItem());
+						Pane pane = FXMLLoader.load	(getClass().getResource("ShowEducatorWindow.fxml"));
 						paneEducators.getChildren().setAll(pane);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block

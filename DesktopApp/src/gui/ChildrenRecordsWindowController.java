@@ -128,7 +128,7 @@ public class ChildrenRecordsWindowController implements Initializable {
 
 	@FXML
 	void btnRefreshClick(ActionEvent event) {
-		//vidjeti da li ce se imati potrebe za ovim
+//vidjeti da li ce se imati potrebe za ovim
 	}
 
 	@FXML
